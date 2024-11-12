@@ -1,3 +1,3 @@
 export const sayHere = () => {
-  console.log("Here");
-};
+  console.log('Here')
+}
