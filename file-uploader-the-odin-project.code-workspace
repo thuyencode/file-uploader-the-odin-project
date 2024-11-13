@@ -39,7 +39,8 @@
       "formulahendry.auto-complete-tag",
       "bradlc.vscode-tailwindcss",
       "burkeholland.simple-react-snippets",
-      "planbcoding.vscode-react-refactor"
+      "planbcoding.vscode-react-refactor",
+      "prisma.prisma"
     ]
   }
 }

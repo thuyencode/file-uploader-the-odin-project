@@ -19,11 +19,7 @@ const EnvSchema = v.object({
   PGUSER: v.pipe(v.string(), v.nonEmpty()),
   PGPASSWORD: v.pipe(v.string(), v.nonEmpty(), v.minLength(15)),
   PGDATABASE: v.pipe(v.string(), v.nonEmpty()),
-  POSTGRESQL_CONNECTION_URL: v.pipe(
-    v.string(),
-    v.url(),
-    v.startsWith('postgresql')
-  )
+  DATABASE_URL: v.pipe(v.string(), v.url(), v.startsWith('postgresql'))
 })
 
 export const env = { ...process.env, ...v.parse(EnvSchema, process.env) }

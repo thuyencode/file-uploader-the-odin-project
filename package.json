@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "nodemon -w src/server -x bun --env-file=.env.development.local src/server/main.ts",
     "start": "NODE_ENV=production bun --env-file=.env.production.local src/server/main.ts",
-    "build": "vite build"
+    "build": "vite build",
+    "prisma:dev": "bunx prisma migrate dev",
+    "prisma:dev:migrate": "bun --env-file=.env.development.local prisma:dev --name",
+    "prisma:generate": "bunx prisma generate",
+    "prisma:generate:watch": "bunx prisma generate --watch"
   },
   "dependencies": {
     "express": "^4.21.1",
