@@ -36,7 +36,9 @@ export default ts_eslint.config(
         'warn',
         { allowConstantExport: true }
       ],
-      '@tanstack/query/exhaustive-deps': 'error'
+      '@tanstack/query/exhaustive-deps': 'error',
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error'
     }
   }
 )

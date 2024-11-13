@@ -1,9 +1,10 @@
-import express from 'express'
+import e from 'express'
 import ViteExpress from 'vite-express'
+import { env } from './env'
 
-const PORT = process.env.PORT
+const PORT = env.PORT
 
-const app = express()
+const app = e()
 
 app.get('/hello', (_, res) => {
   res.send('Hello Vite + React + TypeScript!')
