@@ -15,7 +15,10 @@
     "isolatedModules": true,
     "noEmit": true,
 
-    "typeRoots": ["./node_modules/@types", "./src/server/index.d.ts"]
+    "typeRoots": ["./node_modules/@types", "./src/server/types/index.d.ts"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "tailwind.config.ts", "vite.config.ts"]
 }
