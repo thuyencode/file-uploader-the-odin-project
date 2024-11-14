@@ -13,7 +13,10 @@
     "prisma:generate:watch": "bunx prisma generate --watch"
   },
   "dependencies": {
+    "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
+    "helmet": "^8.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tsx": "^4.19.2",
@@ -26,6 +29,8 @@
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/eslint-plugin-router": "^1.79.0",
     "@types/bun": "^1.1.13",
+    "@types/compression": "^1.7.5",
+    "@types/cookie-parser": "^1.4.7",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
     "@types/node": "^22.9.0",
