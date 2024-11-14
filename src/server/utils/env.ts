@@ -22,6 +22,6 @@ const EnvSchema = v.object({
   DATABASE_URL: v.pipe(v.string(), v.url(), v.startsWith('postgresql'))
 })
 
-export const env = { ...process.env, ...v.parse(EnvSchema, process.env) }
+export const env = { ...Bun.env, ...v.parse(EnvSchema, process.env) }
 
 export type Env = v.InferInput<typeof EnvSchema>

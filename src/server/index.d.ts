@@ -1,10 +1,8 @@
-import { Env } from './env'
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+import type { Env as TypeSafeEnv } from './utils/env'
 
-declare global {
-  namespace NodeJS {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface ProcessEnv extends Env {}
-  }
+declare module 'bun' {
+  interface Env extends TypeSafeEnv {}
 }
 
 export {}

@@ -17,7 +17,15 @@ export default ts_eslint.config(
       ...ts_eslint.configs.recommended,
       ...pluginQuery.configs['flat/recommended'],
       ...pluginRouter.configs['flat/recommended'],
-      eslintConfigPrettier
+      eslintConfigPrettier,
+      {
+        languageOptions: {
+          parserOptions: {
+            projectService: true,
+            tsconfigRootDir: import.meta.dirname
+          }
+        }
+      }
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
