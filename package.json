@@ -15,6 +15,8 @@
   "dependencies": {
     "@hikyu/log": "npm:@jsr/hikyu__log",
     "@std/collections": "npm:@jsr/std__collections",
+    "@tanstack/react-router": "^1.81.7",
+    "@valibot/valibot": "npm:@jsr/valibot__valibot",
     "compression": "^1.7.5",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
@@ -28,7 +30,6 @@
     "react-dom": "^18.3.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "valibot": "^1.0.0-beta.3",
     "vite-express": "*"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
+import { ValiError } from '@valibot/valibot'
 import type { ErrorRequestHandler } from 'express'
-import { ValiError } from 'valibot'
 import { BadRequest, HttpError, InternalServerError } from '../errors'
 import v from '../validation'
 
