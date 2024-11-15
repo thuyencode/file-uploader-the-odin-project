@@ -1,8 +1,6 @@
 import type { ErrorRequestHandler } from 'express'
 import { ValiError } from 'valibot'
-import BadRequest from '../errors/BadRequest'
-import HttpError from '../errors/HttpError'
-import InternalServerError from '../errors/InternalServerError'
+import { BadRequest, HttpError, InternalServerError } from '../errors'
 import v from '../validation'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

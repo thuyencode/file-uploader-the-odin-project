@@ -1,3 +1,5 @@
+import './configs/passport/local.strategy'
+
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import e from 'express'
@@ -6,11 +8,12 @@ import helmet from 'helmet'
 import passport from 'passport'
 import ViteExpress from 'vite-express'
 import api_routes from './api'
-import './configs/passport/local.strategy'
 import NotFound from './errors/NotFound'
-import errorHandler from './middlewares/error-handler'
-import errorResponser from './middlewares/error-responser'
-import internalServerErrorLogger from './middlewares/internal-server-error-logger'
+import {
+  errorHandler,
+  errorResponser,
+  internalServerErrorLogger
+} from './middlewares'
 import { monthsToMilliseconds } from './utils'
 import { env } from './utils/env'
 

@@ -1,4 +1,4 @@
-import unauthedReqHandler from '@/server/middlewares/unauthed-req-handler'
+import { unauthedReqHandler } from '@/server/middlewares'
 import e from 'express'
 
 const sign_out_routes = e.Router()

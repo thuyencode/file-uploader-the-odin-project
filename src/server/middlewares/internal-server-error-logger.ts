@@ -1,6 +1,6 @@
 import { typeLog, types } from '@hikyu/log'
 import type e from 'express'
-import InternalServerError from '../errors/InternalServerError'
+import { InternalServerError } from '../errors'
 
 const internalServerErrorLogger: e.ErrorRequestHandler = (
   err,

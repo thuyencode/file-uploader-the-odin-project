@@ -1,6 +1,6 @@
 import { UserDB } from '@/server/db/user.db'
 import BadRequest from '@/server/errors/BadRequest'
-import { validateReqBody } from '@/server/middlewares/validation'
+import { validateReqBody } from '@/server/middlewares'
 import type { SignUpInput } from '@/server/types/auth'
 import { hashPassword } from '@/server/utils/password'
 import { SignUpSchema } from '@/server/validation/auth.schema'

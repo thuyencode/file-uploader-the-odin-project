@@ -1,5 +1,5 @@
 import type e from 'express'
-import Unauthorized from '../errors/Unauthorized'
+import { Unauthorized } from '../errors'
 
 const unauthedReqHandler: e.RequestHandler = (req, res, next) => {
   if (req.isAuthenticated()) {

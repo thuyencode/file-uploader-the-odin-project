@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ErrorRequestHandler } from 'express'
-import type HttpError from '../errors/HttpError'
-import InternalServerError from '../errors/InternalServerError'
+import { type HttpError, InternalServerError } from '../errors'
 
 const errorResponser: ErrorRequestHandler = (
   err: HttpError,

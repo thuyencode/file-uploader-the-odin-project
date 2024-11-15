@@ -1,5 +1,5 @@
 import { UserDB } from '@/server/db/user.db'
-import BadRequest from '@/server/errors/BadRequest'
+import { BadRequest } from '@/server/errors'
 import { verifyPassword } from '@/server/utils/password'
 import { omit } from '@std/collections'
 import passport from 'passport'

@@ -1,4 +1,4 @@
-import { validateReqBody } from '@/server/middlewares/validation'
+import { validateReqBody } from '@/server/middlewares'
 import type { SignInInput } from '@/server/types/auth'
 import { SignInSchema } from '@/server/validation/auth.schema'
 import e from 'express'
