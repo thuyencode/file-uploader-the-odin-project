@@ -16,7 +16,7 @@ datasource db {
 model User {
   id           String   @id @default(cuid())
   username     String   @unique
-  name         String?
+  name         String
   created_date DateTime @default(now())
   updated_date DateTime @updatedAt
   salted_hash  String
