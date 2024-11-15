@@ -1,6 +1,7 @@
-import { findUserById, findUserByUsername } from '@/server/db/user.db'
+import { UserDB } from '@/server/db/user.db'
+import BadRequest from '@/server/errors/BadRequest'
 import { verifyPassword } from '@/server/utils/password'
-import { omit } from '@std/collections/omit'
+import { omit } from '@std/collections'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 
@@ -10,7 +11,7 @@ passport.serializeUser<Express.User['id']>((user, done) => {
 
 passport.deserializeUser<Express.User['id']>(async (id, done) => {
   try {
-    const user = await findUserById(id)
+    const user = await UserDB.findById(id)
 
     if (!user) {
       throw new Error(`User with ID "${id}" not found`)
@@ -25,16 +26,16 @@ passport.deserializeUser<Express.User['id']>(async (id, done) => {
 export default passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await findUserByUsername(username)
+      const user = await UserDB.findByUsername(username)
 
       if (!user) {
-        throw new Error(`User '${username}' not found`)
+        return done(new BadRequest(`Username '${username}' not found`), false)
       }
 
       const isPasswordCorrect = await verifyPassword(password, user.salted_hash)
 
       if (!isPasswordCorrect) {
-        throw new Error('Wrong password')
+        return done(new BadRequest('Wrong password'), false)
       }
 
       done(null, omit(user, ['salted_hash']))
