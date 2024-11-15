@@ -9,6 +9,6 @@ const auth_routes = e.Router()
 auth_routes.use('/sign-up', sign_up_routes)
 auth_routes.use('/sign-in', sign_in_routes)
 auth_routes.use('/status', status_routes)
-auth_routes.use('/status', sign_out_routes)
+auth_routes.use('/sign-out', sign_out_routes)
 
 export default auth_routes
