@@ -8,7 +8,7 @@ import helmet from 'helmet'
 import passport from 'passport'
 import ViteExpress from 'vite-express'
 import api_routes from './api'
-import NotFound from './errors/NotFound'
+import { NotFound } from './errors'
 import {
   errorHandler,
   errorResponser,
