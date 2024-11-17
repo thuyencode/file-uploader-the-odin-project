@@ -21,7 +21,7 @@ signUpRoutes.post(
     } = req
     const existedUser = await UserDB.findByUsername(username)
 
-    if (existedUser != null) {
+    if (existedUser !== null) {
       throw new BadRequest(`Username '${username} is already existed'`)
     }
 
