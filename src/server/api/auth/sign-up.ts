@@ -6,7 +6,6 @@ import { validateReqBody } from '@/server/middlewares'
 import type { SignUpInput } from '@/server/types/auth'
 import { hashPassword } from '@/server/utils/password'
 import { SignUpSchema } from '@/server/validation/auth.schema'
-import { omit } from '@std/collections'
 import e from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import { HttpStatus } from 'http-status-ts'
@@ -27,15 +26,18 @@ signUpRoutes.post(
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention -- This is for convince
-    const salted_hash = await hashPassword(password)
-    const newUser = await UserDB.insert({ username, name, salted_hash })
+    const { salted_hash, ...newUser } = await UserDB.insert({
+      username,
+      name,
+      salted_hash: await hashPassword(password)
+    })
 
     req.logIn(newUser, (error) => {
       if (error) {
         throw error
       }
 
-      res.status(HttpStatus.CREATED).send(omit(newUser, ['salted_hash']))
+      res.status(HttpStatus.CREATED).send(newUser)
     })
   })
 )
