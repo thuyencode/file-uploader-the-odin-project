@@ -1,14 +1,14 @@
 import e from 'express'
-import sign_in_routes from './sign-in'
-import sign_out_routes from './sign-out'
-import sign_up_routes from './sign-up'
-import status_routes from './status'
+import signInRoutes from './sign-in'
+import signOutRoutes from './sign-out'
+import signUpRoutes from './sign-up'
+import statusRoutes from './status'
 
-const auth_routes = e.Router()
+const authRoutes = e.Router()
 
-auth_routes.use('/sign-up', sign_up_routes)
-auth_routes.use('/sign-in', sign_in_routes)
-auth_routes.use('/status', status_routes)
-auth_routes.use('/sign-out', sign_out_routes)
+authRoutes.use('/sign-up', signUpRoutes)
+authRoutes.use('/sign-in', signInRoutes)
+authRoutes.use('/status', statusRoutes)
+authRoutes.use('/sign-out', signOutRoutes)
 
-export default auth_routes
+export default authRoutes

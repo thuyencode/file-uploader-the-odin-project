@@ -5,17 +5,20 @@ import v from '../validation'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.constructor.name === 'BadRequestError') {
-    return next(new BadRequest(err.message))
+    next(new BadRequest(err.message))
+    return
   }
 
   if (err instanceof ValiError) {
-    const issues = v.flatten(err.issues).nested
+    const { nested: issues } = v.flatten(err.issues)
 
-    return next(new BadRequest(issues))
+    next(new BadRequest(issues))
+    return
   }
 
   if (!(err instanceof HttpError)) {
-    return next(new InternalServerError(err))
+    next(new InternalServerError(err))
+    return
   }
 
   next(err)

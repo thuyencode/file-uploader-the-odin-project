@@ -9,7 +9,7 @@ import HttpError from './HttpError'
  * @extends {HttpError}
  */
 class BadRequest extends HttpError {
-  constructor(cause: Error | string | unknown) {
+  constructor(cause: unknown) {
     super(
       httpStatusTextByCode(HttpStatus.BAD_REQUEST),
       HttpStatus.BAD_REQUEST,

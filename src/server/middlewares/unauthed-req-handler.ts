@@ -3,7 +3,8 @@ import { Unauthorized } from '../errors'
 
 const unauthedReqHandler: e.RequestHandler = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next()
+    next()
+    return
   }
 
   next(new Unauthorized())

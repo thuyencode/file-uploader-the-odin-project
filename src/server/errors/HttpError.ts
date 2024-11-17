@@ -9,13 +9,9 @@ import type { HttpStatus } from 'http-status-ts'
  */
 class HttpError extends Error {
   statusCode: HttpStatus
-  cause?: Error | string | unknown
+  cause?: unknown
 
-  constructor(
-    message: string,
-    statusCode: HttpStatus,
-    cause?: Error | string | unknown
-  ) {
+  constructor(message: string, statusCode: HttpStatus, cause?: unknown) {
     super(message)
     this.statusCode = statusCode
     this.cause = cause

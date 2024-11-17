@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/only-throw-error -- This is ok */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions -- This is ok */
 import { unauthedReqHandler } from '@/server/middlewares'
 import e from 'express'
 
-const sign_out_routes = e.Router()
+const signOutRoutes = e.Router()
 
-sign_out_routes.post('/', unauthedReqHandler, (req, res) => {
+signOutRoutes.post('/', unauthedReqHandler, (req, res) => {
   req.logOut((error) => {
     if (error) {
       throw error
@@ -13,4 +15,4 @@ sign_out_routes.post('/', unauthedReqHandler, (req, res) => {
   })
 })
 
-export default sign_out_routes
+export default signOutRoutes

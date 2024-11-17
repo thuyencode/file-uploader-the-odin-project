@@ -1,10 +1,10 @@
 import { unauthedReqHandler } from '@/server/middlewares'
 import e from 'express'
 
-const status_routes = e.Router()
+const statusRoutes = e.Router()
 
-status_routes.get('/', unauthedReqHandler, (req, res) => {
+statusRoutes.get('/', unauthedReqHandler, (req, res) => {
   res.send(req.user)
 })
 
-export default status_routes
+export default statusRoutes

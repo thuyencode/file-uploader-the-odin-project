@@ -1,18 +1,19 @@
+import { InternalServerError } from '@/server/errors'
 import { validateReqBody } from '@/server/middlewares'
 import type { SignInInput } from '@/server/types/auth'
 import { SignInSchema } from '@/server/validation/auth.schema'
 import e from 'express'
 import passport from 'passport'
 
-const sign_in_routes = e.Router()
+const signInRoutes = e.Router()
 
-sign_in_routes.post(
+signInRoutes.post(
   '/',
   validateReqBody<SignInInput>(SignInSchema),
   passport.authenticate('local', { authInfo: true }),
   (req, res) => {
-    res.send(req.user)
+    throw new InternalServerError('Test')
   }
 )
 
-export default sign_in_routes
+export default signInRoutes

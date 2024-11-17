@@ -1,8 +1,8 @@
 import e from 'express'
-import auth_routes from './auth'
+import authRoutes from './auth'
 
-const api_routes = e.Router()
+const apiRoutes = e.Router()
 
-api_routes.use('/auth', auth_routes)
+apiRoutes.use('/auth', authRoutes)
 
-export default api_routes
+export default apiRoutes

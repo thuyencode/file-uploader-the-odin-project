@@ -7,7 +7,7 @@ import session from 'express-session'
 import helmet from 'helmet'
 import passport from 'passport'
 import ViteExpress from 'vite-express'
-import api_routes from './api'
+import apiRoutes from './api'
 import { NotFound } from './errors'
 import {
   errorHandler,
@@ -17,7 +17,7 @@ import {
 import { monthsToMilliseconds } from './utils'
 import { env } from './utils/env'
 
-const PORT = env.PORT
+const { PORT } = env
 
 const app = e()
 
@@ -50,7 +50,7 @@ app.get('/hello', (_, res) => {
   res.send('Hello Vite + React + TypeScript!')
 })
 
-app.use('/api', api_routes)
+app.use('/api', apiRoutes)
 
 app.all('*', () => {
   throw new NotFound()
@@ -60,6 +60,6 @@ app.use(errorHandler)
 app.use(internalServerErrorLogger)
 app.use(errorResponser)
 
-ViteExpress.listen(app, PORT, () =>
+ViteExpress.listen(app, PORT, () => {
   console.log(`Server is listening on port ${PORT}...`)
-)
+})

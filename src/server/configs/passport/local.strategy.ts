@@ -9,38 +9,43 @@ passport.serializeUser<Express.User['id']>((user, done) => {
   done(null, user.id)
 })
 
-passport.deserializeUser<Express.User['id']>(async (id, done) => {
-  try {
-    const user = await UserDB.findById(id)
-
-    if (!user) {
-      throw new Error(`User with ID "${id}" not found`)
-    }
-
-    done(null, omit(user, ['salted_hash']))
-  } catch (error) {
-    done(error, false)
-  }
-})
-
-export default passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await UserDB.findByUsername(username)
-
-      if (!user) {
-        return done(new BadRequest(`Username '${username}' not found`), false)
-      }
-
-      const isPasswordCorrect = await verifyPassword(password, user.salted_hash)
-
-      if (!isPasswordCorrect) {
-        return done(new BadRequest('Wrong password'), false)
+passport.deserializeUser<Express.User['id']>((id, done) => {
+  UserDB.findById(id)
+    .then((user) => {
+      if (user == null) {
+        throw new Error(`User with ID "${id}" not found`)
       }
 
       done(null, omit(user, ['salted_hash']))
-    } catch (error) {
+    })
+    .catch((error) => {
       done(error, false)
-    }
+    })
+})
+
+export default passport.use(
+  new LocalStrategy((username, password, done) => {
+    UserDB.findByUsername(username)
+      .then(async (user) => {
+        if (user == null) {
+          done(new BadRequest(`Username '${username}' not found`), false)
+          return
+        }
+
+        const isPasswordCorrect = await verifyPassword(
+          password,
+          user.salted_hash
+        )
+
+        if (!isPasswordCorrect) {
+          done(new BadRequest('Wrong password'), false)
+          return
+        }
+
+        done(null, omit(user, ['salted_hash']))
+      })
+      .catch((error) => {
+        done(error, false)
+      })
   })
 )

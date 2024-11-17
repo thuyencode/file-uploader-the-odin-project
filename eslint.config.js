@@ -1,6 +1,7 @@
 import js from '@eslint/js'
 import pluginQuery from '@tanstack/eslint-plugin-query'
 import pluginRouter from '@tanstack/eslint-plugin-router'
+import love from 'eslint-config-love'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
@@ -25,6 +26,10 @@ export default ts_eslint.config(
             tsconfigRootDir: import.meta.dirname
           }
         }
+      },
+      {
+        ...love,
+        files: ['**/*.js', '**/*.ts']
       }
     ],
     files: ['**/*.{ts,tsx}'],
@@ -46,7 +51,11 @@ export default ts_eslint.config(
       ],
       '@tanstack/query/exhaustive-deps': 'error',
       '@typescript-eslint/consistent-type-exports': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error'
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-magic-numbers': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off'
     }
   }
 )

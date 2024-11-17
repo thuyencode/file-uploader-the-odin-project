@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/only-throw-error -- This is ok */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions -- This is ok */
 import { UserDB } from '@/server/db/user.db'
 import BadRequest from '@/server/errors/BadRequest'
 import { validateReqBody } from '@/server/middlewares'
@@ -9,25 +11,28 @@ import e from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import { HttpStatus } from 'http-status-ts'
 
-const sign_up_routes = e.Router()
+const signUpRoutes = e.Router()
 
-sign_up_routes.post(
+signUpRoutes.post(
   '/',
   validateReqBody<SignUpInput>(SignUpSchema),
   expressAsyncHandler<unknown, unknown, SignUpInput>(async (req, res) => {
-    const { username, name, password } = req.body
+    const {
+      body: { username, name, password }
+    } = req
     const existedUser = await UserDB.findByUsername(username)
 
-    if (existedUser) {
+    if (existedUser != null) {
       throw new BadRequest(`Username '${username} is already existed'`)
     }
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- This is for convince
     const salted_hash = await hashPassword(password)
     const newUser = await UserDB.insert({ username, name, salted_hash })
 
-    req.logIn(newUser, (err) => {
-      if (err) {
-        throw err
+    req.logIn(newUser, (error) => {
+      if (error) {
+        throw error
       }
 
       res.status(HttpStatus.CREATED).send(omit(newUser, ['salted_hash']))
@@ -35,4 +40,4 @@ sign_up_routes.post(
   })
 )
 
-export default sign_up_routes
+export default signUpRoutes
