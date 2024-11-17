@@ -15,7 +15,7 @@ export default ts_eslint.config(
   {
     extends: [
       js.configs.recommended,
-      ...ts_eslint.configs.recommended,
+      ...ts_eslint.configs.recommendedTypeChecked,
       ...pluginQuery.configs['flat/recommended'],
       ...pluginRouter.configs['flat/recommended'],
       eslintConfigPrettier,
@@ -34,7 +34,7 @@ export default ts_eslint.config(
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2023,
       globals: globals.browser
     },
     plugins: {

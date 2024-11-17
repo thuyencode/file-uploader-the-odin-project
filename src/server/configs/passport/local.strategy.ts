@@ -12,7 +12,7 @@ passport.serializeUser<Express.User['id']>((user, done) => {
 passport.deserializeUser<Express.User['id']>((id, done) => {
   UserDB.findById(id)
     .then((user) => {
-      if (user == null) {
+      if (user === null) {
         throw new Error(`User with ID "${id}" not found`)
       }
 
@@ -27,7 +27,7 @@ export default passport.use(
   new LocalStrategy((username, password, done) => {
     UserDB.findByUsername(username)
       .then(async (user) => {
-        if (user == null) {
+        if (user === null) {
           done(new BadRequest(`Username '${username}' not found`), false)
           return
         }
