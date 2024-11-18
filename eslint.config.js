@@ -55,7 +55,8 @@ export default ts_eslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-magic-numbers': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off'
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/strict-boolean-expressions': 'off'
     }
   }
 )
