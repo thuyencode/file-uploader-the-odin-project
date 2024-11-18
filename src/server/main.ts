@@ -1,5 +1,6 @@
 import './configs/passport/local.strategy'
 
+import { PrismaSessionStore } from '@quixo3/prisma-session-store'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import e from 'express'
@@ -8,7 +9,7 @@ import helmet from 'helmet'
 import passport from 'passport'
 import ViteExpress from 'vite-express'
 import apiRoutes from './api'
-import { NotFound } from './errors'
+import prisma from './db/client'
 import {
   errorHandler,
   errorResponser,
@@ -41,7 +42,11 @@ app.use(
     cookie: {
       maxAge: monthsToMilliseconds(1),
       httpOnly: true
-    }
+    },
+    store: new PrismaSessionStore(prisma, {
+      checkPeriod: 2 * 60 * 1000, //ms
+      dbRecordIdIsSessionId: true
+    })
   })
 )
 app.use(passport.session())
@@ -51,10 +56,6 @@ app.get('/hello', (_, res) => {
 })
 
 app.use('/api', apiRoutes)
-
-app.all('*', () => {
-  throw new NotFound()
-})
 
 app.use(errorHandler)
 app.use(internalServerErrorLogger)

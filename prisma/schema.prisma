@@ -21,3 +21,10 @@ model User {
   updated_date DateTime @updatedAt
   salted_hash  String
 }
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}
