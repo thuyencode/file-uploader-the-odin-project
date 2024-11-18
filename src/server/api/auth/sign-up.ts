@@ -13,6 +13,7 @@ import { HttpStatus } from 'http-status-ts'
 const signUpRoutes = e.Router()
 
 signUpRoutes.post(
+  // Handle the POST requests for creating new users
   '/',
   validateReqBody<SignUpInput>(SignUpSchema),
   expressAsyncHandler<unknown, unknown, SignUpInput>(async (req, res) => {
