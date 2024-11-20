@@ -14,12 +14,13 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  username     String   @unique
-  name         String
-  created_date DateTime @default(now())
-  updated_date DateTime @updatedAt
-  salted_hash  String
+  id             String         @id @default(uuid())
+  username       String         @unique
+  name           String
+  created_date   DateTime       @default(now())
+  updated_date   DateTime       @updatedAt
+  salted_hash    String
+  uploaded_files UploadedFile[]
 }
 
 model Session {
@@ -27,4 +28,19 @@ model Session {
   sid       String   @unique
   data      String
   expiresAt DateTime
+}
+
+model UploadedFile {
+  id           String   @id @default(cuid())
+  created_date DateTime @default(now())
+  updated_date DateTime @updatedAt
+  originalname String
+  encoding     String
+  mimetype     String
+  destination  String
+  filename     String   @unique
+  size         Int
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  shareable    Boolean  @default(false)
 }
