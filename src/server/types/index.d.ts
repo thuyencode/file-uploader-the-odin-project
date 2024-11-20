@@ -1,4 +1,4 @@
-import type { User as UserModelType } from '@/server/db/user.db'
+import type { User as UserModelType } from '@/server/db/User.db'
 import type { Env as TypeSafeEnv } from '@/server/utils/env'
 
 declare module 'bun' {
