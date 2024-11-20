@@ -1,10 +1,10 @@
 import e from 'express'
 import authRoutes from './auth'
-import protectedRoutes from '@/server/api/(protected)'
+import fileRoutes from './files'
 
 const apiRoutes = e.Router()
 
 apiRoutes.use('/auth', authRoutes)
-apiRoutes.use(protectedRoutes)
+apiRoutes.use('/files', fileRoutes)
 
 export default apiRoutes
