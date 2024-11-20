@@ -4,7 +4,7 @@ import Footer from './footer'
 import Header from './header'
 import Sidebar from './sidebar'
 
-const Layout = (): ReactElement => (
+const AuthedLayout = (): ReactElement => (
   <>
     <Header />
     <Sidebar />
@@ -17,4 +17,4 @@ const Layout = (): ReactElement => (
   </>
 )
 
-export default Layout
+export default AuthedLayout
