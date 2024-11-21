@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import type { ReactElement } from 'react'
-import RenderWhenAuthed from '../render-when-auth'
+import { RenderWhenAuthed } from '../ui'
 import ThemeToggle from './theme-toggle'
 
 const Header = (): ReactElement => (

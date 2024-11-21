@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
-import RenderWhenAuthed from '../render-when-auth'
+import { RenderWhenAuthed } from '../ui'
 import Footer from './footer'
 import Header from './header'
 import Sidebar from './sidebar'
