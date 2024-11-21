@@ -1,6 +1,5 @@
-import { ValiError } from '@valibot/valibot'
+import v from '@/shared/validation'
 import type { ErrorRequestHandler } from 'express'
-import v from '../../shared/validation'
 import { BadRequest, HttpError, InternalServerError } from '../errors'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
@@ -9,7 +8,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     return
   }
 
-  if (err instanceof ValiError) {
+  if (err instanceof v.ValiError) {
     const { nested: issues } = v.flatten(err.issues)
 
     next(new BadRequest(issues))

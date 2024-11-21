@@ -1,4 +1,4 @@
-import * as v from '@valibot/valibot'
+import v from '@/shared/validation'
 
 const EnvSchema = v.object({
   PORT: v.pipe(
