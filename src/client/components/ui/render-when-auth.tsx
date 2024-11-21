@@ -1,5 +1,5 @@
+import { useAuthStatus } from '@/client/hooks/auth'
 import type { FunctionComponent, ReactNode } from 'react'
-import useAuthStatus from '../hooks/auth/use-auth-status'
 
 interface RenderWhenAuthedProps {
   whenAuthed: ReactNode

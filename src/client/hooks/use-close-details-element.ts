@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is ok */
 import {
   useEffect,
   useRef,

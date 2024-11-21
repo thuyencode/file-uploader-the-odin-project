@@ -1,8 +1,8 @@
-interface IUseAuthStatus {
+interface UseAuthStatus {
   isAuthed: boolean
 }
 
-const useAuthStatus = (): IUseAuthStatus => {
+const useAuthStatus = (): UseAuthStatus => {
   const isAuthed = false
 
   return { isAuthed }

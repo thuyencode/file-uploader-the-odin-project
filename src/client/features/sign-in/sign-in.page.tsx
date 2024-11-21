@@ -1,11 +1,11 @@
+import { InputField } from '@/client/components/ui'
 import type { SignInInput } from '@/shared/types/auth.type'
 import { SignInSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import InputField from './components/input-field'
 
-const SignInPage = (): ReactNode => {
+const SignInPage = (): ReactElement => {
   const {
     register,
     handleSubmit,
