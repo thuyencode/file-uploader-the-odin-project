@@ -1,4 +1,3 @@
-import { cn } from '@/client/utils/tailwind'
 import { Icon, type IconifyIconProps } from '@iconify/react'
 import { forwardRef, type ComponentProps, type ReactElement } from 'react'
 import type { FieldError } from 'react-hook-form'
@@ -16,9 +15,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
     return (
       <div className='space-y-1.5 text-left'>
         <label
-          className={cn('input input-bordered flex items-center gap-2', {
-            'input-error': isError
-          })}
+          className={`input input-bordered flex items-center gap-2 ${isError && 'input-error'}`}
           htmlFor={name}
         >
           <Icon icon={icon} />
