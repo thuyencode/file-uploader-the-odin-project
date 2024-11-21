@@ -2,6 +2,7 @@ import { InputField } from '@/client/components/ui'
 import type { SignInInput } from '@/shared/types/auth.type'
 import { SignInSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 
@@ -71,7 +72,9 @@ const SignInPage = (): ReactElement => {
           {isSubmitting ? 'Signing' : 'Sign'} In
         </button>
 
-        <a className='font-medium hover:link'>I don't have an account</a>
+        <Link className='font-medium hover:link' to='/sign-up'>
+          I don't have an account
+        </Link>
       </div>
     </form>
   )

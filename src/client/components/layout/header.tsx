@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 import { RenderWhenAuthed } from '../ui'
 import ThemeToggle from './theme-toggle'
@@ -27,10 +28,12 @@ const Header = (): ReactElement => (
           </>
         }
         whenNot={
-          <h4 className='inline-flex items-center gap-1 font-bold'>
-            File Uploader
-            <Icon className='text-2xl' icon={'mdi:file-upload'} />
-          </h4>
+          <Link to='/'>
+            <h4 className='inline-flex items-center gap-1 font-bold'>
+              File Uploader
+              <Icon className='text-2xl' icon={'mdi:file-upload'} />
+            </h4>
+          </Link>
         }
       />
     </div>

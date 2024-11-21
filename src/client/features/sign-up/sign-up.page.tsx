@@ -2,6 +2,7 @@ import { InputField } from '@/client/components/ui'
 import type { SignUpInput } from '@/shared/types/auth.type'
 import { SignUpSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 
@@ -82,7 +83,9 @@ const SignUpPage = (): ReactElement => {
           {isSubmitting ? 'Signing' : 'Sign'} Up
         </button>
 
-        <a className='font-medium hover:link'>I have an account already</a>
+        <Link className='font-medium hover:link' to='/sign-in'>
+          I have an account already
+        </Link>
       </div>
     </form>
   )

@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 
 const HomePage = (): ReactElement => (
@@ -13,14 +14,19 @@ const HomePage = (): ReactElement => (
     </h1>
 
     <div className='inline-flex w-fit flex-col gap-3'>
-      <button className='btn btn-primary btn-lg'>
+      <Link className='btn btn-primary btn-lg' to='/sign-in' role='button'>
         Sign in
         <Icon className='text-2xl' icon={'mdi:user-check'} />
-      </button>
-      <button className='btn btn-outline btn-secondary btn-lg'>
+      </Link>
+
+      <Link
+        className='btn btn-outline btn-secondary btn-lg'
+        to='/sign-up'
+        role='button'
+      >
         Sign up
         <Icon className='text-2xl' icon={'mdi:user-add-outline'} />
-      </button>
+      </Link>
     </div>
   </div>
 )
