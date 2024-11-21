@@ -3,7 +3,7 @@ interface UseAuthStatus {
 }
 
 const useAuthStatus = (): UseAuthStatus => {
-  const isAuthed = false
+  const isAuthed = true
 
   return { isAuthed }
 }
