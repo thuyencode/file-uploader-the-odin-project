@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- This is fine */
 import type e from 'express'
+import v from '../../shared/validation'
 import type { NullableKeys } from '../types/helpers'
-import v from '../validation'
 
 export const validateReqBody =
   <T>(

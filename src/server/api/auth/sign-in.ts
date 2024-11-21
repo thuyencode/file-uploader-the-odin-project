@@ -1,6 +1,6 @@
 import { validateReqBody } from '@/server/middlewares'
-import type { SignInInput } from '@/server/types/auth'
-import { SignInSchema } from '@/server/validation/auth.schema'
+import type { SignInInput } from '@/shared/types/auth.type'
+import { SignInSchema } from '@/shared/validation/auth.schema'
 import e from 'express'
 import passport from 'passport'
 

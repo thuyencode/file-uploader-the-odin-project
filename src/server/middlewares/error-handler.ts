@@ -1,7 +1,7 @@
 import { ValiError } from '@valibot/valibot'
 import type { ErrorRequestHandler } from 'express'
+import v from '../../shared/validation'
 import { BadRequest, HttpError, InternalServerError } from '../errors'
-import v from '../validation'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.constructor.name === 'BadRequestError') {
