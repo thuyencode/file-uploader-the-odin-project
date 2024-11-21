@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { Link } from '@tanstack/react-router'
 import type { FunctionComponent } from 'react'
 import { createPortal } from 'react-dom'
 
@@ -20,10 +21,10 @@ const Sidebar: FunctionComponent = () =>
         </li>
 
         <li>
-          <a className='link-primary'>
+          <Link className='link-primary' to='/'>
             <Icon className='text-xl' icon={'mdi:folder-open-outline'} />
             Files
-          </a>
+          </Link>
         </li>
 
         <li className='lg:hidden'>
