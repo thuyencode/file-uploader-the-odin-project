@@ -1,15 +1,16 @@
 import { Outlet } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
+import RenderWhenAuthed from '../render-when-auth'
 import Footer from './footer'
 import Header from './header'
 import Sidebar from './sidebar'
 
-const AuthedLayout = (): ReactElement => (
+const Layout = (): ReactElement => (
   <>
     <Header />
-    <Sidebar />
+    <RenderWhenAuthed whenAuthed={<Sidebar />} />
 
-    <div className='container flex-1 p-10'>
+    <div className='flex-1 p-5 lg:py-10'>
       <Outlet />
     </div>
 
@@ -17,4 +18,4 @@ const AuthedLayout = (): ReactElement => (
   </>
 )
 
-export default AuthedLayout
+export default Layout
