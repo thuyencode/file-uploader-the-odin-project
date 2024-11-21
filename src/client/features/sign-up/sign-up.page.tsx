@@ -36,7 +36,7 @@ const SignUpPage = (): ReactElement => {
         void handleSubmit(onSubmit)(event)
       }}
     >
-      <h2>Sign in to your account</h2>
+      <h2>Sign up to your account</h2>
 
       <div className='space-y-2.5'>
         <InputField
@@ -79,7 +79,7 @@ const SignUpPage = (): ReactElement => {
           type='submit'
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'SignUpg' : 'Sign'} Up
+          {isSubmitting ? 'Signing' : 'Sign'} Up
         </button>
 
         <a className='font-medium hover:link'>I have an account already</a>

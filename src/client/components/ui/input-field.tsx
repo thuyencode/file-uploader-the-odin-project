@@ -14,7 +14,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
     const errorMessage = error?.message
 
     return (
-      <div className='space-y-1'>
+      <div className='space-y-1.5 text-left'>
         <label
           className={cn('input input-bordered flex items-center gap-2', {
             'input-error': isError
