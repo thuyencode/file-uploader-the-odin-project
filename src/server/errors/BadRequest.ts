@@ -2,7 +2,7 @@ import { HttpError } from '@/shared/errors'
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 
 /**
- * Bad Request error
+ * Used to create objects representing HTTP status code `400 Bad Request`
  *
  * @class BadRequest
  * @typedef {BadRequest}

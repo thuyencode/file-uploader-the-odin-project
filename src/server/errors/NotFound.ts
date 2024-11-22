@@ -2,7 +2,7 @@ import { HttpError } from '@/shared/errors'
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 
 /**
- * Not Found error
+ * Used to create objects representing HTTP status code `404 Not Found`
  *
  * @class NotFound
  * @typedef {NotFound}

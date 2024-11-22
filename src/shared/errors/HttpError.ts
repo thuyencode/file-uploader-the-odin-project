@@ -1,7 +1,7 @@
 import type { HttpStatus } from 'http-status-ts'
 
 /**
- * Custom HTTP error extends from this class
+ * The base class representing HTTP response status codes
  *
  * @class HttpError
  * @typedef {HttpError}

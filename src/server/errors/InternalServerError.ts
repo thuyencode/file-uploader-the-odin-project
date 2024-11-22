@@ -2,7 +2,7 @@ import { HttpError } from '@/shared/errors'
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 
 /**
- * Internal Server Error
+ * Used to create objects representing HTTP status code `500 Internal Server Error`
  *
  * @class InternalServerError
  * @typedef {InternalServerError}

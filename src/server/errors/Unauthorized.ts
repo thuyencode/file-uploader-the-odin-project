@@ -2,7 +2,7 @@ import { HttpError } from '@/shared/errors'
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 
 /**
- * Unauthorized error
+ * Used to create objects representing HTTP status code `401 Unauthorized`
  *
  * @class Unauthorized
  * @typedef {Unauthorized}
