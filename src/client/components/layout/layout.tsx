@@ -1,5 +1,6 @@
 import { Outlet } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
+import TanStackRouterDevtools from '../dev-tools/tanstack-router'
 import { RenderWhenAuthed } from '../ui'
 import Footer from './footer'
 import Header from './header'
@@ -13,6 +14,8 @@ const Layout = (): ReactElement => (
     <div className='flex-1 p-5 lg:py-10'>
       <Outlet />
     </div>
+
+    <TanStackRouterDevtools />
 
     <Footer />
   </>
