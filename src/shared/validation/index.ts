@@ -1,3 +1,3 @@
-import * as v from 'valibot'
+import * as v from '@valibot/valibot'
 
 export default v
