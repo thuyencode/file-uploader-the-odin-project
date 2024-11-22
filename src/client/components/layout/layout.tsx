@@ -15,9 +15,9 @@ const Layout = (): ReactElement => (
       <Outlet />
     </div>
 
-    <TanStackRouterDevtools />
-
     <Footer />
+
+    <TanStackRouterDevtools />
   </>
 )
 
