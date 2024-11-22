@@ -1,5 +1,5 @@
+import { HttpError } from '@/shared/errors'
 import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
-import HttpError from './HttpError'
 
 /**
  * Bad Request error

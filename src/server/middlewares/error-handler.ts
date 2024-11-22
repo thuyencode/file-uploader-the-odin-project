@@ -1,6 +1,7 @@
+import { HttpError } from '@/shared/errors'
 import v from '@/shared/validation'
 import type { ErrorRequestHandler } from 'express'
-import { BadRequest, HttpError, InternalServerError } from '../errors'
+import { BadRequest, InternalServerError } from '../errors'
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.constructor.name === 'BadRequestError') {

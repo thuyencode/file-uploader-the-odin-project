@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/only-throw-error -- This is ok */
 import { UserDB } from '@/server/db/User.db'
-import BadRequest from '@/server/errors/BadRequest'
+import { BadRequest } from '@/server/errors'
 import { validateReqBody } from '@/server/middlewares'
 import { hashPassword } from '@/server/utils/password'
 import type { SignUpInput } from '@/shared/types/auth.type'

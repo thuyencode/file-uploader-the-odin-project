@@ -1,5 +1,6 @@
+import type { HttpError } from '@/shared/errors'
 import type { ErrorRequestHandler } from 'express'
-import { type HttpError, InternalServerError } from '../errors'
+import { InternalServerError } from '../errors'
 
 const errorResponser: ErrorRequestHandler = (
   err: HttpError,
@@ -16,12 +17,10 @@ const errorResponser: ErrorRequestHandler = (
   if (err instanceof InternalServerError) {
     const { cause, ...rest } = error
 
-    return res.status(err.statusCode).json({
-      error: rest
-    })
+    return res.status(err.statusCode).json(rest)
   }
 
-  res.status(err.statusCode).json({ error })
+  res.status(err.statusCode).json(error)
 }
 
 export default errorResponser
