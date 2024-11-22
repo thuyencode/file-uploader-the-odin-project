@@ -1,12 +1,16 @@
 import { InputField } from '@/client/components/ui'
+import type { HttpError } from '@/shared/errors'
 import type { SignInInput } from '@/shared/types/auth.type'
 import { SignInSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Link } from '@tanstack/react-router'
+import { isAxiosError } from 'axios'
 import type { ReactElement } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useSignIn } from './hooks/auth'
 
 const SignInPage = (): ReactElement => {
+  const { signIn } = useSignIn()
   const {
     register,
     handleSubmit,
@@ -18,14 +22,10 @@ const SignInPage = (): ReactElement => {
 
   const onSubmit: SubmitHandler<SignInInput> = async (values) => {
     try {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000)
-      })
-
-      console.log(values)
+      await signIn(values)
     } catch (error) {
-      if (error instanceof Error) {
-        setError('root', { message: error.message })
+      if (isAxiosError<HttpError>(error)) {
+        setError('root', { message: String(error.response?.data.cause) })
       }
     }
   }
@@ -38,6 +38,10 @@ const SignInPage = (): ReactElement => {
       }}
     >
       <h2>Sign in to your account</h2>
+
+      {errors.root && (
+        <div className='-my-2 text-error'>{errors.root.message}!</div>
+      )}
 
       <div className='space-y-2.5'>
         <InputField
