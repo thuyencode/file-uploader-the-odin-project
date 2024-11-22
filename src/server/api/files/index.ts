@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is ok */
 import { UploadedFileDB } from '@/server/db/UploadedFile.db'
 import { BadRequest, NotFound, Unauthorized } from '@/server/errors'
 import { unauthedReqHandler, validateReqBody } from '@/server/middlewares'
