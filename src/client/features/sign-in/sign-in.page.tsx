@@ -3,6 +3,7 @@ import type { HttpError } from '@/shared/errors'
 import type { SignInInput } from '@/shared/types/auth.type'
 import { SignInSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { Link } from '@tanstack/react-router'
 import { isAxiosError } from 'axios'
 import type { ReactElement } from 'react'
@@ -40,7 +41,10 @@ const SignInPage = (): ReactElement => {
       <h2>Sign in to your account</h2>
 
       {errors.root && (
-        <div className='-my-2 text-error'>{errors.root.message}!</div>
+        <div className='alert alert-error !-mb-5 !mt-5' role='alert'>
+          <Icon icon='mdi:alert-circle-outline' />
+          {errors.root.message}!
+        </div>
       )}
 
       <div className='space-y-2.5'>
