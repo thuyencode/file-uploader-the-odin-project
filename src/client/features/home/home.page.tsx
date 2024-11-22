@@ -1,4 +1,4 @@
-import { useAuthStatus } from '@/client/hooks/auth'
+import { useAuthStatus } from '@/client/hooks'
 import type { ReactElement } from 'react'
 import { HomePageWhenAuthed, HomePageWhenUnauthed } from './component/home'
 
