@@ -11,7 +11,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Icon } from '@iconify/react'
 import { Link } from '@tanstack/react-router'
 import { isAxiosError } from 'axios'
-import type { ReactElement } from 'react'
+import type { FunctionComponent } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 
 const FORM_TEXTS = {
@@ -39,11 +39,11 @@ type AuthFormProps =
       schema: typeof SignUpSchema
     }
 
-const AuthForm = ({
+const AuthForm: FunctionComponent<AuthFormProps> = ({
   type,
   onSubmitAction,
   schema
-}: AuthFormProps): ReactElement => {
+}) => {
   const {
     register,
     handleSubmit,
