@@ -1,12 +1,17 @@
 import { InputField } from '@/client/components/ui'
+import type { HttpError } from '@/shared/errors'
 import type { SignUpInput } from '@/shared/types/auth.type'
 import { SignUpSchema } from '@/shared/validation/auth.schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { Icon } from '@iconify/react'
 import { Link } from '@tanstack/react-router'
+import { isAxiosError } from 'axios'
 import type { ReactElement } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useSignUp } from './hooks/auth'
 
 const SignUpPage = (): ReactElement => {
+  const { signUp } = useSignUp()
   const {
     register,
     handleSubmit,
@@ -18,14 +23,10 @@ const SignUpPage = (): ReactElement => {
 
   const onSubmit: SubmitHandler<SignUpInput> = async (values) => {
     try {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000)
-      })
-
-      console.log(values)
+      await signUp(values)
     } catch (error) {
-      if (error instanceof Error) {
-        setError('root', { message: error.message })
+      if (isAxiosError<HttpError>(error)) {
+        setError('root', { message: String(error.response?.data.cause) })
       }
     }
   }
@@ -37,7 +38,14 @@ const SignUpPage = (): ReactElement => {
         void handleSubmit(onSubmit)(event)
       }}
     >
-      <h2>Sign up to your account</h2>
+      <h2>Create a new account</h2>
+
+      {errors.root && (
+        <div className='alert alert-error !-mb-5 !mt-5' role='alert'>
+          <Icon icon='mdi:alert-circle-outline' />
+          {errors.root.message}!
+        </div>
+      )}
 
       <div className='space-y-2.5'>
         <InputField

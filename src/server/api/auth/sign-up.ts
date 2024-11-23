@@ -23,7 +23,7 @@ signUpRoutes.post(
     const existedUser = await UserDB.findByUsername(username)
 
     if (existedUser !== null) {
-      throw new BadRequest(`Username '${username} is already existed'`)
+      throw new BadRequest(`Username '${username}' is already existed`)
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention -- This is for convince

@@ -1,4 +1,4 @@
-import type { SignInInput } from '@/shared/types/auth.type'
+import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
 import baseApi from './base-api'
 
 const getAuthStatusApi = async (signal?: AbortSignal): Promise<Express.User> =>
@@ -7,9 +7,13 @@ const getAuthStatusApi = async (signal?: AbortSignal): Promise<Express.User> =>
 const postSignInApi = async (signInInput: SignInInput): Promise<Express.User> =>
   (await baseApi.post<Express.User>('/auth/sign-in', signInInput)).data
 
+const postSignUpApi = async (signUpInput: SignUpInput): Promise<Express.User> =>
+  (await baseApi.post<Express.User>('/auth/sign-up', signUpInput)).data
+
 const AuthApi = {
   getAuthStatusApi,
-  postSignInApi
+  postSignInApi,
+  postSignUpApi
 }
 
 export default AuthApi
