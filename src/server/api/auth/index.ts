@@ -1,8 +1,8 @@
 import e from 'express'
-import signInRoutes from './sign-in'
-import signOutRoutes from './sign-out'
-import signUpRoutes from './sign-up'
-import statusRoutes from './status'
+import signInRoutes from './sign-in.route'
+import signOutRoutes from './sign-out.route'
+import signUpRoutes from './sign-up.route'
+import statusRoutes from './status.route'
 
 const authRoutes = e.Router()
 

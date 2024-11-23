@@ -1,6 +1,6 @@
 import e from 'express'
 import authRoutes from './auth'
-import fileRoutes from './files'
+import fileRoutes from './files.route'
 
 const apiRoutes = e.Router()
 
