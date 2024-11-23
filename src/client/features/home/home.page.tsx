@@ -1,15 +1,12 @@
-import { useAuthStatus } from '@/client/hooks/auth'
+import { RenderWhenAuthed } from '@/client/components/ui'
 import type { ReactElement } from 'react'
 import { HomePageWhenAuthed, HomePageWhenUnauthed } from './component/home'
 
-const HomePage = (): ReactElement => {
-  const { isAuthed } = useAuthStatus()
-
-  if (isAuthed) {
-    return <HomePageWhenAuthed />
-  }
-
-  return <HomePageWhenUnauthed />
-}
+const HomePage = (): ReactElement => (
+  <RenderWhenAuthed
+    whenAuthed={<HomePageWhenAuthed />}
+    whenNot={<HomePageWhenUnauthed />}
+  />
+)
 
 export default HomePage
