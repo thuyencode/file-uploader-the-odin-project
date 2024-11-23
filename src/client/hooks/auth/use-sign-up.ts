@@ -6,7 +6,7 @@ import type { SignUpInput } from '@/shared/types/auth.type'
 import { useMutation, type UseMutateAsyncFunction } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 
-interface UseSignUp {
+export interface UseSignUp {
   signUp: UseMutateAsyncFunction<Express.User, AxiosError, SignUpInput>
   error: AxiosError<HttpError> | null
   isError: boolean

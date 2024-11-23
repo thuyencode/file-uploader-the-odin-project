@@ -1,4 +1,4 @@
-import { useAuthStatus } from '@/client/hooks'
+import { useAuthStatus } from '@/client/hooks/auth'
 import type { FunctionComponent, ReactNode } from 'react'
 
 interface RenderWhenAuthedProps {

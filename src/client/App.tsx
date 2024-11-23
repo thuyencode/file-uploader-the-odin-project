@@ -2,7 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RouterProvider } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
-import { useAuthStatus } from './hooks'
+import { useAuthStatus } from './hooks/auth'
 import queryClient from './query-client'
 import router from './router'
 
