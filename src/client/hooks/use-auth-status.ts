@@ -12,7 +12,7 @@ const useAuthStatus = (): UseAuthStatus => {
     queryKey: [QUERY_KEYS.AUTH_STATUS],
     queryFn: async ({ signal }) => {
       try {
-        return await AuthApi.getAuthStatusApi(signal)
+        return await AuthApi.getAuthStatus(signal)
       } catch (error) {
         return null
       }

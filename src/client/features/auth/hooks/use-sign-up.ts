@@ -20,7 +20,7 @@ const useSignUp = (): UseSignUp => {
   } = useMutation({
     mutationKey: [MUTATIONS_KEYS.SIGN_IN],
     mutationFn: async (signUpInput: SignUpInput) =>
-      await AuthApi.postSignUpApi(signUpInput),
+      await AuthApi.postSignUp(signUpInput),
     ...authMutationOptions
   })
 
