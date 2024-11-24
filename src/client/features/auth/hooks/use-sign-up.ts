@@ -18,7 +18,7 @@ const useSignUp = (): UseSignUp => {
     error,
     isError
   } = useMutation({
-    mutationKey: [MUTATIONS_KEYS.SIGN_IN],
+    mutationKey: [MUTATIONS_KEYS.SIGN_UP],
     mutationFn: async (signUpInput: SignUpInput) =>
       await AuthApi.postSignUp(signUpInput),
     ...authMutationOptions
