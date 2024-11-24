@@ -1,10 +1,10 @@
 import AuthApi from '@/client/apis/auth.api'
 import { MUTATIONS_KEYS } from '@/client/libs/constants'
-import authMutationOptions from '@/client/libs/mutations/auth.mutation'
 import type { HttpError } from '@/shared/errors'
 import type { SignInInput } from '@/shared/types/auth.type'
 import { useMutation, type UseMutateAsyncFunction } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
+import { authMutationOptions } from '../mutations'
 
 export interface UseSignIn {
   signIn: UseMutateAsyncFunction<Express.User, AxiosError, SignInInput>

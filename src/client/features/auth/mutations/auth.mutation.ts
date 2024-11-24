@@ -1,3 +1,4 @@
+import { QUERY_KEYS } from '@/client/libs/constants'
 import queryClient from '@/client/query-client'
 import router from '@/client/router'
 import type { HttpError } from '@/shared/errors'
@@ -5,7 +6,6 @@ import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
 import type { UseMutationOptions } from '@tanstack/react-query'
 import type {} from '@tanstack/react-router'
 import type { AxiosError } from 'axios'
-import { QUERY_KEYS } from '../constants'
 
 const authMutationOptions: UseMutationOptions<
   Express.User,
