@@ -1,7 +1,7 @@
-import AuthForm from '@/client/components/form/auth'
-import { useSignIn } from '@/client/hooks/auth'
 import { SignInSchema } from '@/shared/validation/auth.schema'
 import type { ReactElement } from 'react'
+import { AuthForm } from '../components'
+import { useSignIn } from '../hooks'
 
 const SignInPage = (): ReactElement => {
   const { signIn } = useSignIn()

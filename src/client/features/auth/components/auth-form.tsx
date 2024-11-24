@@ -1,6 +1,3 @@
-import { InputField } from '@/client/components/ui'
-import type { UseSignIn } from '@/client/hooks/auth/use-sign-in'
-import type { UseSignUp } from '@/client/hooks/auth/use-sign-up'
 import type { HttpError } from '@/shared/errors'
 import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
 import type {
@@ -13,6 +10,8 @@ import { Link } from '@tanstack/react-router'
 import { isAxiosError } from 'axios'
 import type { FunctionComponent } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import type { UseSignIn, UseSignUp } from '../hooks'
+import { InputField } from './ui'
 
 const FORM_TEXTS = {
   'sign-in': {

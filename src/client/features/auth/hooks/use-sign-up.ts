@@ -3,7 +3,7 @@ import { MUTATIONS_KEYS } from '@/client/libs/constants'
 import authMutationOptions from '@/client/libs/mutations/auth.mutation'
 import type { HttpError } from '@/shared/errors'
 import type { SignUpInput } from '@/shared/types/auth.type'
-import { useMutation, type UseMutateAsyncFunction } from '@tanstack/react-query'
+import { type UseMutateAsyncFunction, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 
 export interface UseSignUp {
