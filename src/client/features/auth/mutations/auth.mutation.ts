@@ -4,7 +4,6 @@ import router from '@/client/router'
 import type { HttpError } from '@/shared/errors'
 import type { SignInInput, SignUpInput } from '@/shared/types/auth.type'
 import type { UseMutationOptions } from '@tanstack/react-query'
-import type {} from '@tanstack/react-router'
 import type { AxiosError } from 'axios'
 
 const authMutationOptions: UseMutationOptions<

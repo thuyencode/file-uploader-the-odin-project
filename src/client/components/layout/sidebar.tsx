@@ -1,3 +1,4 @@
+import useSignOut from '@/client/hooks/use-sign-out'
 import { Icon } from '@iconify/react'
 import { Link } from '@tanstack/react-router'
 import type { FunctionComponent } from 'react'
@@ -9,8 +10,14 @@ if (!sidebarElement) {
   throw new Error("There's no element with id 'sidebar'")
 }
 
-const Sidebar: FunctionComponent = () =>
-  createPortal(
+const Sidebar: FunctionComponent = () => {
+  const { signOut } = useSignOut()
+
+  const onClickSignOut = (): void => {
+    void signOut()
+  }
+
+  return createPortal(
     <div className='flex min-h-full w-80 flex-row border-r border-r-base-content/50 bg-base-200 pl-1 max-lg:pr-4'>
       <ul className='menu flex-1 font-medium'>
         <li className='menu-title text-base-content focus:bg-none'>
@@ -35,10 +42,10 @@ const Sidebar: FunctionComponent = () =>
         </li>
 
         <li>
-          <a>
+          <span onClick={onClickSignOut}>
             <Icon className='text-xl' icon={'mdi:user-remove-outline'} />
             Sign Out
-          </a>
+          </span>
         </li>
       </ul>
 
@@ -52,5 +59,6 @@ const Sidebar: FunctionComponent = () =>
     </div>,
     sidebarElement
   )
+}
 
 export default Sidebar
