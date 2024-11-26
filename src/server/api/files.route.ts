@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is ok */
 
-import { FileConfigurationSchema } from '@/shared/validation/file-config.schema'
+import { FileConfigurationSchema } from '@/shared/validation/file.schema'
+import { pick } from '@std/collections'
 import e from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -8,9 +9,19 @@ import { HttpStatus } from 'http-status-ts'
 import multer from 'multer'
 import { UploadedFileDB } from '../db/UploadedFile.db'
 import { BadRequest, NotFound, Unauthorized } from '../errors'
-import { unauthedReqHandler, validateReqBody } from '../middlewares'
-import type { FileConfigurationInput } from '../types/file-config'
+import { FILTER_BY_FIELDS, ORDER_BY_FIELDS } from '../libs/constants'
+import {
+  unauthedReqHandler,
+  validateReqBody,
+  validateReqQuery
+} from '../middlewares'
+import type {
+  FileConfigurationInput,
+  FilterByInput,
+  OrderByInput
+} from '../types/file'
 import { checkIfDownloadable } from '../utils/files'
+import { FilterBySchema, OrderBySchema } from '../validation/file.schema'
 
 const upload = multer({ dest: 'uploads/' })
 
@@ -20,12 +31,32 @@ fileRoutes.get(
   // Handle GET requests for getting files' info
   '/',
   unauthedReqHandler,
-  expressAsyncHandler(async (req, res) => {
+  validateReqQuery<OrderByInput>(OrderBySchema),
+  validateReqQuery<FilterByInput>(FilterBySchema),
+  expressAsyncHandler<
+    ParamsDictionary,
+    unknown,
+    unknown,
+    OrderByInput & FilterByInput
+  >(async (req, res) => {
     const {
-      user: { id: userId }
-    } = req as e.Request & { user: NonNullable<Express.User> }
+      user: { id: userId },
+      query
+    } = req as typeof req & { user: NonNullable<Express.User> }
 
-    const files = await UploadedFileDB.findByUserId(userId)
+    const orderBy = pick<OrderByInput, keyof OrderByInput>(
+      query,
+      ORDER_BY_FIELDS
+    )
+    const filterBy = pick<FilterByInput, keyof FilterByInput>(
+      query,
+      FILTER_BY_FIELDS
+    )
+
+    const files = await UploadedFileDB.findByUserId(userId, {
+      orderBy,
+      filterBy
+    })
 
     res.send(files)
   })
@@ -41,7 +72,7 @@ fileRoutes.post(
       file,
       query: { shareable },
       user: { id: userId }
-    } = req as e.Request & { user: NonNullable<Express.User> }
+    } = req as typeof req & { user: NonNullable<Express.User> }
 
     if (!file) {
       throw new BadRequest(
@@ -97,11 +128,7 @@ fileRoutes.post(
         body: { shareable },
         params: { id },
         user: { id: userId }
-      } = req as e.Request<
-        ParamsDictionary,
-        unknown,
-        FileConfigurationInput
-      > & { user: NonNullable<Express.User> }
+      } = req as typeof req & { user: NonNullable<Express.User> }
 
       const file = await UploadedFileDB.findById(id)
 
