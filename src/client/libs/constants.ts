@@ -1,5 +1,6 @@
 export const QUERY_KEYS = {
-  AUTH_STATUS: '/api/auth/status'
+  AUTH_STATUS: '/api/auth/status',
+  FILES: '/api/files'
 } as const
 
 export const MUTATIONS_KEYS = {

@@ -11,7 +11,7 @@ const Layout = (): ReactElement => (
     <Header />
     <RenderWhenAuthed whenAuthed={<Sidebar />} />
 
-    <div className='flex-1 p-5 lg:py-10'>
+    <div className='flex-1'>
       <Outlet />
     </div>
 
