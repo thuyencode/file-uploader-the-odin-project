@@ -18,15 +18,11 @@ const useFiles = (): UseFiles => {
 
   const files = useMemo(
     () =>
-      data.map((file) => {
-        console.log(typeof file.created_date)
-
-        return {
-          ...file,
-          created_date: new Date(file.created_date),
-          updated_date: new Date(file.updated_date)
-        }
-      }),
+      data.map((file) => ({
+        ...file,
+        created_date: new Date(file.created_date),
+        updated_date: new Date(file.updated_date)
+      })),
     [data]
   )
 
