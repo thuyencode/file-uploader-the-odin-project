@@ -1,6 +1,6 @@
+import type { UploadedFile } from '@prisma/client'
 import type v from '../../shared/validation'
 import type { FileConfigurationSchema } from '../../shared/validation/file.schema'
-import type { UploadedFile } from '../db/UploadedFile.db'
 import type { FilterBySchema, OrderBySchema } from '../validation/file.schema'
 
 export type FileConfigurationInput = v.InferInput<

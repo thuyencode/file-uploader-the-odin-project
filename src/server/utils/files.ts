@@ -1,4 +1,4 @@
-import type { UploadedFile } from '@/server/db/UploadedFile.db'
+import type { UploadedFile } from '@prisma/client'
 
 export const checkIfDownloadable = (
   file: UploadedFile,

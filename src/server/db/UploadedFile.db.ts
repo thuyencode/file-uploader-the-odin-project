@@ -35,8 +35,6 @@ const updateById = async (
     data: fileConfiguration
   })
 
-export type { UploadedFile }
-
 export const UploadedFileDB = {
   findById,
   findByUserId,
