@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 
-const HomePageWhenUnauthed = (): ReactElement => (
+const DefaultHomePage = (): ReactElement => (
   <div className='mt-36 space-y-9 text-center'>
     <h1 className='flex items-center justify-center'>
       Let's start sharing your files
@@ -31,4 +31,4 @@ const HomePageWhenUnauthed = (): ReactElement => (
   </div>
 )
 
-export default HomePageWhenUnauthed
+export default DefaultHomePage
