@@ -1,4 +1,5 @@
 import { bytesToMB } from '@/client/libs/utils'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import type { UploadedFile } from '@prisma/client'
 import type { FunctionComponent } from 'react'
 
@@ -27,6 +28,17 @@ const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => {
             defaultChecked={file.shareable}
           />
         </label>
+      </td>
+
+      <td>
+        <a
+          className='link-hover link link-primary inline-flex items-center gap-1 font-medium'
+          href={`/api/files/${file.id}/download`}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Icon className='text-xl' icon='mdi:link' /> Open
+        </a>
       </td>
     </tr>
   )

@@ -17,6 +17,7 @@ const FilesTable: FunctionComponent<FilesTableProps> = ({ files }) => (
           <th>Mimetype</th>
           <th>Size</th>
           <th>Sharable</th>
+          <th>Link</th>
         </tr>
       </thead>
 
