@@ -17,12 +17,14 @@ const FORM_TEXTS = {
   'sign-in': {
     title: 'Sign in to your account',
     submit_btn: 'In',
-    second_choice: "I don't have an account"
+    second_choice: "I don't have an account",
+    second_choice_link: '/sign-up'
   },
   'sign-up': {
     title: 'Create a new account',
     submit_btn: 'Up',
-    second_choice: 'I have an account already'
+    second_choice: 'I have an account already',
+    second_choice_link: '/sign-in'
   }
 } as const
 
@@ -124,7 +126,10 @@ const AuthForm: FunctionComponent<AuthFormProps> = ({
           {isSubmitting ? 'Signing' : 'Sign'} {FORM_TEXTS[type].submit_btn}
         </button>
 
-        <Link className='font-medium hover:link' to='/sign-in'>
+        <Link
+          className='font-medium hover:link'
+          to={FORM_TEXTS[type].second_choice_link}
+        >
           {FORM_TEXTS[type].second_choice}
         </Link>
       </div>

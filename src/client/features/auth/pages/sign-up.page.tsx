@@ -7,7 +7,9 @@ const SignUpPage = (): ReactElement => {
   const { signUp } = useSignUp()
 
   return (
-    <AuthForm type='sign-up' onSubmitAction={signUp} schema={SignUpSchema} />
+    <div className='mt-36'>
+      <AuthForm type='sign-up' onSubmitAction={signUp} schema={SignUpSchema} />
+    </div>
   )
 }
 
