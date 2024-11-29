@@ -19,13 +19,14 @@ const FileRowSharingAction: FunctionComponent<FileRowShareActionProps> = ({
 
     setIsCopied(true)
 
-    await navigator.clipboard.writeText(
-      `${document.location.host}/files/${fileId}`
-    )
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, 2000)
-    })
+    await Promise.all([
+      navigator.clipboard.writeText(
+        `${document.location.host}/files/${fileId}`
+      ),
+      new Promise((resolve) => {
+        setTimeout(resolve, 2000)
+      })
+    ])
 
     setIsCopied(false)
   }
