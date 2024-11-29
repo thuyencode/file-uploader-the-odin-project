@@ -28,7 +28,7 @@ const Sidebar: FunctionComponent = () => {
         </li>
 
         <li>
-          <Link className='link-primary' to='/'>
+          <Link className='link-primary' to='/files'>
             <Icon className='text-xl' icon={'mdi:folder-open-outline'} />
             Files
           </Link>

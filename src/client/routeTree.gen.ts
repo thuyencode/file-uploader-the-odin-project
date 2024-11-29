@@ -13,22 +13,30 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ProtectedRouteImport } from './routes/_protected/route'
 import { Route as AuthRouteImport } from './routes/_auth/route'
-import { Route as IndexImport } from './routes/index'
+import { Route as RouteImport } from './routes/route'
+import { Route as ProtectedFilesRouteImport } from './routes/_protected/files/route'
 
 // Create Virtual Routes
 
 const AuthSignUpLazyImport = createFileRoute('/_auth/sign-up')()
 const AuthSignInLazyImport = createFileRoute('/_auth/sign-in')()
+const ProtectedFilesIndexLazyImport = createFileRoute('/_protected/files/')()
 
 // Create/Update Routes
+
+const ProtectedRouteRoute = ProtectedRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthRouteRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const RouteRoute = RouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
@@ -46,6 +54,20 @@ const AuthSignInLazyRoute = AuthSignInLazyImport.update({
   getParentRoute: () => AuthRouteRoute,
 } as any).lazy(() => import('./routes/_auth/sign-in.lazy').then((d) => d.Route))
 
+const ProtectedFilesRouteRoute = ProtectedFilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+
+const ProtectedFilesIndexLazyRoute = ProtectedFilesIndexLazyImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProtectedFilesRouteRoute,
+} as any).lazy(() =>
+  import('./routes/_protected/files/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -54,7 +76,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof RouteImport
       parentRoute: typeof rootRoute
     }
     '/_auth': {
@@ -63,6 +85,20 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRoute
+    }
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/_protected/files': {
+      id: '/_protected/files'
+      path: '/files'
+      fullPath: '/files'
+      preLoaderRoute: typeof ProtectedFilesRouteImport
+      parentRoute: typeof ProtectedRouteImport
     }
     '/_auth/sign-in': {
       id: '/_auth/sign-in'
@@ -77,6 +113,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-up'
       preLoaderRoute: typeof AuthSignUpLazyImport
       parentRoute: typeof AuthRouteImport
+    }
+    '/_protected/files/': {
+      id: '/_protected/files/'
+      path: '/'
+      fullPath: '/files/'
+      preLoaderRoute: typeof ProtectedFilesIndexLazyImport
+      parentRoute: typeof ProtectedFilesRouteImport
     }
   }
 }
@@ -97,45 +140,84 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
+interface ProtectedFilesRouteRouteChildren {
+  ProtectedFilesIndexLazyRoute: typeof ProtectedFilesIndexLazyRoute
+}
+
+const ProtectedFilesRouteRouteChildren: ProtectedFilesRouteRouteChildren = {
+  ProtectedFilesIndexLazyRoute: ProtectedFilesIndexLazyRoute,
+}
+
+const ProtectedFilesRouteRouteWithChildren =
+  ProtectedFilesRouteRoute._addFileChildren(ProtectedFilesRouteRouteChildren)
+
+interface ProtectedRouteRouteChildren {
+  ProtectedFilesRouteRoute: typeof ProtectedFilesRouteRouteWithChildren
+}
+
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedFilesRouteRoute: ProtectedFilesRouteRouteWithChildren,
+}
+
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteRouteWithChildren
+  '/': typeof RouteRoute
+  '': typeof ProtectedRouteRouteWithChildren
+  '/files': typeof ProtectedFilesRouteRouteWithChildren
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
+  '/files/': typeof ProtectedFilesIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteRouteWithChildren
+  '/': typeof RouteRoute
+  '': typeof ProtectedRouteRouteWithChildren
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
+  '/files': typeof ProtectedFilesIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
+  '/': typeof RouteRoute
   '/_auth': typeof AuthRouteRouteWithChildren
+  '/_protected': typeof ProtectedRouteRouteWithChildren
+  '/_protected/files': typeof ProtectedFilesRouteRouteWithChildren
   '/_auth/sign-in': typeof AuthSignInLazyRoute
   '/_auth/sign-up': typeof AuthSignUpLazyRoute
+  '/_protected/files/': typeof ProtectedFilesIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/sign-in' | '/sign-up'
+  fullPaths: '/' | '' | '/files' | '/sign-in' | '/sign-up' | '/files/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/sign-in' | '/sign-up'
-  id: '__root__' | '/' | '/_auth' | '/_auth/sign-in' | '/_auth/sign-up'
+  to: '/' | '' | '/sign-in' | '/sign-up' | '/files'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_protected'
+    | '/_protected/files'
+    | '/_auth/sign-in'
+    | '/_auth/sign-up'
+    | '/_protected/files/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  RouteRoute: typeof RouteRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  RouteRoute: RouteRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -149,17 +231,31 @@ export const routeTree = rootRoute
       "filePath": "__root.ts",
       "children": [
         "/",
-        "/_auth"
+        "/_auth",
+        "/_protected"
       ]
     },
     "/": {
-      "filePath": "index.ts"
+      "filePath": "route.ts"
     },
     "/_auth": {
       "filePath": "_auth/route.ts",
       "children": [
         "/_auth/sign-in",
         "/_auth/sign-up"
+      ]
+    },
+    "/_protected": {
+      "filePath": "_protected/route.ts",
+      "children": [
+        "/_protected/files"
+      ]
+    },
+    "/_protected/files": {
+      "filePath": "_protected/files/route.ts",
+      "parent": "/_protected",
+      "children": [
+        "/_protected/files/"
       ]
     },
     "/_auth/sign-in": {
@@ -169,6 +265,10 @@ export const routeTree = rootRoute
     "/_auth/sign-up": {
       "filePath": "_auth/sign-up.lazy.ts",
       "parent": "/_auth"
+    },
+    "/_protected/files/": {
+      "filePath": "_protected/files/index.lazy.ts",
+      "parent": "/_protected/files"
     }
   }
 }

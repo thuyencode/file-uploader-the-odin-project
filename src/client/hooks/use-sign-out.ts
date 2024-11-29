@@ -1,10 +1,10 @@
 import type { HttpError } from '@/shared/errors'
 import { useMutation, type UseMutateAsyncFunction } from '@tanstack/react-query'
+import { redirect } from '@tanstack/react-router'
 import type { AxiosError } from 'axios'
 import AuthApi from '../apis/auth.api'
 import { MUTATIONS_KEYS, QUERY_KEYS } from '../libs/constants'
 import queryClient from '../query-client'
-import router from '../router'
 
 interface UseSignOut {
   signOut: UseMutateAsyncFunction
@@ -19,12 +19,11 @@ const useSignOut = (): UseSignOut => {
     isError
   } = useMutation({
     mutationKey: [MUTATIONS_KEYS.SIGN_OUT],
-    mutationFn: AuthApi.postSignOut,
-    onSuccess: async () => {
+    mutationFn: async () => {
       queryClient.setQueryData([QUERY_KEYS.AUTH_STATUS], null)
+      redirect({ to: '/' })
 
-      await router.navigate({ to: '/' })
-      await router.invalidate()
+      await AuthApi.postSignOut()
     }
   })
 

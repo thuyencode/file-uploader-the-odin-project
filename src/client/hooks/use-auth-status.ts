@@ -1,6 +1,8 @@
 import AuthApi from '@/client/apis/auth.api'
 import { QUERY_KEYS } from '@/client/libs/constants'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import router from '../router'
 
 interface UseAuthStatus {
   isAuthed: boolean
@@ -22,6 +24,14 @@ const useAuthStatus = (): UseAuthStatus => {
   })
 
   const isAuthed = Boolean(user)
+
+  useEffect(() => {
+    const unsubscribe = (): void => {
+      void router.invalidate()
+    }
+
+    return unsubscribe
+  }, [user])
 
   return { isAuthed, user }
 }
