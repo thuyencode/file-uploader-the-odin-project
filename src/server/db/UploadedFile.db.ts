@@ -7,7 +7,8 @@ const findById = async (id: string): Promise<UploadedFile | null> =>
 
 const findByUserId = async (userId: string): Promise<UploadedFile[]> =>
   await prisma.uploadedFile.findMany({
-    where: { userId }
+    where: { userId },
+    orderBy: { updated_date: 'desc' }
   })
 
 const insert = async (
