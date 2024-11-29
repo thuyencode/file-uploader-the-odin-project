@@ -7,7 +7,11 @@ import type { AxiosError } from 'axios'
 import { authMutationOptions } from '../mutations'
 
 export interface UseSignIn {
-  signIn: UseMutateAsyncFunction<Express.User, AxiosError, SignInInput>
+  signIn: UseMutateAsyncFunction<
+    Express.User,
+    AxiosError<HttpError>,
+    SignInInput
+  >
   error: AxiosError<HttpError> | null
   isError: boolean
 }
