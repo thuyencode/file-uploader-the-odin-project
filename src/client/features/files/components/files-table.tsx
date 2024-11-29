@@ -8,7 +8,7 @@ interface FilesTableProps {
 
 const FilesTable: FunctionComponent<FilesTableProps> = ({ files }) => (
   <div className='overflow-x-auto'>
-    <table className='table table-zebra'>
+    <table className='table table-zebra max-xl:table-sm max-lg:table-xs'>
       <thead>
         <tr>
           <th></th>

@@ -15,13 +15,13 @@ const Header = (): ReactElement => (
           <>
             <label
               htmlFor='sidebar-toggle'
-              className='btn btn-ghost drawer-button lg:hidden'
+              className='btn btn-ghost drawer-button xl:hidden'
               aria-label='open sidebar'
             >
               <Icon className='text-xl' icon={'mdi:hamburger-close'} />
             </label>
 
-            <a className='btn btn-primary max-lg:hidden'>
+            <a className='btn btn-primary max-xl:hidden'>
               Upload Files
               <Icon className='text-xl' icon={'mdi:cloud-upload-outline'} />
             </a>
