@@ -1,24 +1,13 @@
 import type { UploadedFile } from '@prisma/client'
-import type {
-  FileConfigurationInput,
-  FilterByInput,
-  OrderByInput
-} from '../types/file'
+import type { FileConfigurationInput } from '../types/file'
 import prisma from './client'
 
 const findById = async (id: string): Promise<UploadedFile | null> =>
   await prisma.uploadedFile.findUnique({ where: { id } })
 
-const findByUserId = async (
-  userId: string,
-  {
-    orderBy = {},
-    filterBy = {}
-  }: { orderBy?: OrderByInput; filterBy?: FilterByInput }
-): Promise<UploadedFile[]> =>
+const findByUserId = async (userId: string): Promise<UploadedFile[]> =>
   await prisma.uploadedFile.findMany({
-    where: { userId, ...filterBy },
-    orderBy
+    where: { userId }
   })
 
 const insert = async (

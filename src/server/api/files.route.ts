@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is ok */
-
 import { FileConfigurationSchema } from '@/shared/validation/file.schema'
-import { pick } from '@std/collections'
 import e from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -9,19 +7,9 @@ import { HttpStatus } from 'http-status-ts'
 import multer from 'multer'
 import { UploadedFileDB } from '../db/UploadedFile.db'
 import { BadRequest, NotFound, Unauthorized } from '../errors'
-import { FILTER_BY_FIELDS, ORDER_BY_FIELDS } from '../libs/constants'
-import {
-  unauthedReqHandler,
-  validateReqBody,
-  validateReqQuery
-} from '../middlewares'
-import type {
-  FileConfigurationInput,
-  FilterByInput,
-  OrderByInput
-} from '../types/file'
+import { unauthedReqHandler, validateReqBody } from '../middlewares'
+import type { FileConfigurationInput } from '../types/file'
 import { checkIfDownloadable } from '../utils/files'
-import { FilterBySchema, OrderBySchema } from '../validation/file.schema'
 
 const upload = multer({ dest: 'uploads/' })
 
@@ -31,32 +19,12 @@ fileRoutes.get(
   // Handle GET requests for getting files' info
   '/',
   unauthedReqHandler,
-  validateReqQuery<OrderByInput>(OrderBySchema),
-  validateReqQuery<FilterByInput>(FilterBySchema),
-  expressAsyncHandler<
-    ParamsDictionary,
-    unknown,
-    unknown,
-    OrderByInput & FilterByInput
-  >(async (req, res) => {
+  expressAsyncHandler(async (req, res) => {
     const {
-      user: { id: userId },
-      query
+      user: { id: userId }
     } = req as typeof req & { user: NonNullable<Express.User> }
 
-    const orderBy = pick<OrderByInput, keyof OrderByInput>(
-      query,
-      ORDER_BY_FIELDS
-    )
-    const filterBy = pick<FilterByInput, keyof FilterByInput>(
-      query,
-      FILTER_BY_FIELDS
-    )
-
-    const files = await UploadedFileDB.findByUserId(userId, {
-      orderBy,
-      filterBy
-    })
+    const files = await UploadedFileDB.findByUserId(userId)
 
     res.send(files)
   })
