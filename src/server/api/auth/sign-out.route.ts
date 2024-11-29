@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/only-throw-error -- This is ok */
 import { unauthedReqHandler } from '@/server/middlewares'
 import e from 'express'
 
