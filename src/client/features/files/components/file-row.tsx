@@ -1,7 +1,7 @@
 import { bytesToMB } from '@/client/libs/utils'
-import { Icon } from '@iconify/react/dist/iconify.js'
 import type { UploadedFile } from '@prisma/client'
 import type { FunctionComponent } from 'react'
+import FileRowActions from './file-row-actions'
 
 interface FileRowProps {
   file: UploadedFile
@@ -30,16 +30,7 @@ const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => {
         </label>
       </td>
 
-      <td>
-        <a
-          className='link-hover link link-primary inline-flex items-center gap-1 font-medium'
-          href={`/api/files/${file.id}/download`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Icon className='text-xl' icon='mdi:link' /> Open
-        </a>
-      </td>
+      <FileRowActions file={file} />
     </tr>
   )
 }
