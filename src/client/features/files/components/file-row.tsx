@@ -15,7 +15,10 @@ const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => {
     <tr className='hover'>
       <th>{id}</th>
       <td>{file.originalname}</td>
-      <td>{file.updated_date.toDateString()}</td>
+      <td>
+        {file.updated_date.toLocaleDateString()}{' '}
+        {file.updated_date.toLocaleTimeString()}
+      </td>
       <td>{file.mimetype}</td>
       <td>{bytesToMB(file.size).toFixed(2)} MB</td>
 
