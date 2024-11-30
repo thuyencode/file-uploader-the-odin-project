@@ -1,5 +1,6 @@
 import { HttpError } from '@/shared/errors'
-import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatusCode } from 'axios'
+import { httpStatusTextByCode } from '../utils'
 
 /**
  * Used to create objects representing HTTP status code `500 Internal Server Error`
@@ -11,8 +12,8 @@ import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 class InternalServerError extends HttpError {
   constructor(cause: Error | string) {
     super(
-      httpStatusTextByCode(HttpStatus.INTERNAL_SERVER_ERROR),
-      HttpStatus.INTERNAL_SERVER_ERROR,
+      httpStatusTextByCode(HttpStatusCode.InternalServerError),
+      HttpStatusCode.InternalServerError,
       cause
     )
   }

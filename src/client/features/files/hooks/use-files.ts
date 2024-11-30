@@ -1,7 +1,7 @@
 import type { UploadedFile } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { redirect } from '@tanstack/react-router'
-import { HttpStatus } from 'http-status-ts'
+import { HttpStatusCode } from 'axios'
 import { useMemo } from 'react'
 import filesQueryOptions from '../queries/files.query'
 
@@ -12,7 +12,10 @@ interface UseFiles {
 const useFiles = (): UseFiles => {
   const { data, error } = useQuery(filesQueryOptions)
 
-  if (error && error.response?.data.statusCode === HttpStatus.UNAUTHORIZED) {
+  if (
+    error &&
+    error.response?.data.statusCode === HttpStatusCode.Unauthorized
+  ) {
     throw redirect({ to: '/sign-in' })
   }
 

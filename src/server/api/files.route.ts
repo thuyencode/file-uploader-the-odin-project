@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is ok */
 import { FileConfigurationSchema } from '@/shared/validation/file.schema'
+import { HttpStatusCode } from 'axios'
 import e from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import type { ParamsDictionary } from 'express-serve-static-core'
-import { HttpStatus } from 'http-status-ts'
 import multer from 'multer'
 import { UploadedFileDB } from '../db/UploadedFile.db'
 import { BadRequest, NotFound, Unauthorized } from '../errors'
@@ -56,7 +56,7 @@ fileRoutes.post(
       userId
     })
 
-    res.status(HttpStatus.CREATED).send(uploadedFile)
+    res.status(HttpStatusCode.Created).send(uploadedFile)
   })
 )
 
@@ -110,7 +110,7 @@ fileRoutes.post(
 
       const updatedFile = await UploadedFileDB.updateById(id, { shareable })
 
-      res.status(HttpStatus.OK).send(updatedFile)
+      res.status(HttpStatusCode.Ok).send(updatedFile)
     }
   )
 )

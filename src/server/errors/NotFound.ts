@@ -1,5 +1,6 @@
 import { HttpError } from '@/shared/errors'
-import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatusCode } from 'axios'
+import { httpStatusTextByCode } from '../utils'
 
 /**
  * Used to create objects representing HTTP status code `404 Not Found`
@@ -10,7 +11,10 @@ import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
  */
 class NotFound extends HttpError {
   constructor() {
-    super(httpStatusTextByCode(HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)
+    super(
+      httpStatusTextByCode(HttpStatusCode.NotFound),
+      HttpStatusCode.NotFound
+    )
   }
 }
 

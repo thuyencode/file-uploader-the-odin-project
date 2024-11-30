@@ -1,5 +1,6 @@
 import { HttpError } from '@/shared/errors'
-import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatusCode } from 'axios'
+import { httpStatusTextByCode } from '../utils'
 
 /**
  * Used to create objects representing HTTP status code `400 Bad Request`
@@ -11,8 +12,8 @@ import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
 class BadRequest extends HttpError {
   constructor(cause: unknown) {
     super(
-      httpStatusTextByCode(HttpStatus.BAD_REQUEST),
-      HttpStatus.BAD_REQUEST,
+      httpStatusTextByCode(HttpStatusCode.BadRequest),
+      HttpStatusCode.BadRequest,
       cause
     )
   }

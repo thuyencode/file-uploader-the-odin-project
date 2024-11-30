@@ -1,5 +1,4 @@
-import type { HttpStatus } from 'http-status-ts'
-
+import type { HttpStatusCode } from 'axios'
 /**
  * The base class representing HTTP response status codes
  *
@@ -8,10 +7,10 @@ import type { HttpStatus } from 'http-status-ts'
  * @extends {Error}
  */
 class HttpError extends Error {
-  statusCode: HttpStatus
+  statusCode: HttpStatusCode
   cause?: unknown
 
-  constructor(message: string, statusCode: HttpStatus, cause?: unknown) {
+  constructor(message: string, statusCode: HttpStatusCode, cause?: unknown) {
     super(message)
     this.statusCode = statusCode
     this.cause = cause

@@ -1,5 +1,6 @@
 import { HttpError } from '@/shared/errors'
-import { HttpStatus, httpStatusTextByCode } from 'http-status-ts'
+import { HttpStatusCode } from 'axios'
+import { httpStatusTextByCode } from '../utils'
 
 /**
  * Used to create objects representing HTTP status code `401 Unauthorized`
@@ -12,11 +13,11 @@ class Unauthorized extends HttpError {
   constructor(
     cause:
       | Error
-      | string = `${httpStatusTextByCode(HttpStatus.UNAUTHORIZED)} request`
+      | string = `${httpStatusTextByCode(HttpStatusCode.Unauthorized)} request`
   ) {
     super(
-      httpStatusTextByCode(HttpStatus.UNAUTHORIZED),
-      HttpStatus.UNAUTHORIZED,
+      httpStatusTextByCode(HttpStatusCode.Unauthorized),
+      HttpStatusCode.Unauthorized,
       cause
     )
   }

@@ -6,8 +6,7 @@ import type { HttpError } from '@/shared/errors'
 import type { UploadedFile } from '@prisma/client'
 import { useMutation, type UseMutateAsyncFunction } from '@tanstack/react-query'
 import { redirect } from '@tanstack/react-router'
-import type { AxiosError } from 'axios'
-import { HttpStatus } from 'http-status-ts'
+import { HttpStatusCode, type AxiosError } from 'axios'
 
 interface UseFileConfig {
   configFile: UseMutateAsyncFunction<
@@ -26,7 +25,7 @@ const useFileConfig = (id: UploadedFile['id']): UseFileConfig => {
       await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.FILES] })
     },
     onError(error) {
-      if (error.response?.data.statusCode === HttpStatus.UNAUTHORIZED) {
+      if (error.response?.data.statusCode === HttpStatusCode.Unauthorized) {
         queryClient.setQueryData([QUERY_KEYS.AUTH_STATUS], null)
 
         throw redirect({ to: '/sign-in' })

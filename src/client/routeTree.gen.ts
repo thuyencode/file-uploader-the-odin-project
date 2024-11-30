@@ -22,6 +22,7 @@ import { Route as ProtectedFilesRouteImport } from './routes/_protected/files/ro
 
 const AuthSignUpLazyImport = createFileRoute('/_auth/sign-up')()
 const AuthSignInLazyImport = createFileRoute('/_auth/sign-in')()
+const FilesFileIdIndexLazyImport = createFileRoute('/files/$fileId/')()
 const ProtectedFilesIndexLazyImport = createFileRoute('/_protected/files/')()
 
 // Create/Update Routes
@@ -59,6 +60,14 @@ const ProtectedFilesRouteRoute = ProtectedFilesRouteImport.update({
   path: '/files',
   getParentRoute: () => ProtectedRouteRoute,
 } as any)
+
+const FilesFileIdIndexLazyRoute = FilesFileIdIndexLazyImport.update({
+  id: '/files/$fileId/',
+  path: '/files/$fileId/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/files.$fileId/index.lazy').then((d) => d.Route),
+)
 
 const ProtectedFilesIndexLazyRoute = ProtectedFilesIndexLazyImport.update({
   id: '/',
@@ -121,6 +130,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedFilesIndexLazyImport
       parentRoute: typeof ProtectedFilesRouteImport
     }
+    '/files/$fileId/': {
+      id: '/files/$fileId/'
+      path: '/files/$fileId'
+      fullPath: '/files/$fileId'
+      preLoaderRoute: typeof FilesFileIdIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -170,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
   '/files/': typeof ProtectedFilesIndexLazyRoute
+  '/files/$fileId': typeof FilesFileIdIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -178,6 +195,7 @@ export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
   '/files': typeof ProtectedFilesIndexLazyRoute
+  '/files/$fileId': typeof FilesFileIdIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -189,13 +207,21 @@ export interface FileRoutesById {
   '/_auth/sign-in': typeof AuthSignInLazyRoute
   '/_auth/sign-up': typeof AuthSignUpLazyRoute
   '/_protected/files/': typeof ProtectedFilesIndexLazyRoute
+  '/files/$fileId/': typeof FilesFileIdIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/files' | '/sign-in' | '/sign-up' | '/files/'
+  fullPaths:
+    | '/'
+    | ''
+    | '/files'
+    | '/sign-in'
+    | '/sign-up'
+    | '/files/'
+    | '/files/$fileId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/sign-in' | '/sign-up' | '/files'
+  to: '/' | '' | '/sign-in' | '/sign-up' | '/files' | '/files/$fileId'
   id:
     | '__root__'
     | '/'
@@ -205,6 +231,7 @@ export interface FileRouteTypes {
     | '/_auth/sign-in'
     | '/_auth/sign-up'
     | '/_protected/files/'
+    | '/files/$fileId/'
   fileRoutesById: FileRoutesById
 }
 
@@ -212,12 +239,14 @@ export interface RootRouteChildren {
   RouteRoute: typeof RouteRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
+  FilesFileIdIndexLazyRoute: typeof FilesFileIdIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   RouteRoute: RouteRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
+  FilesFileIdIndexLazyRoute: FilesFileIdIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -232,7 +261,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_auth",
-        "/_protected"
+        "/_protected",
+        "/files/$fileId/"
       ]
     },
     "/": {
@@ -269,6 +299,9 @@ export const routeTree = rootRoute
     "/_protected/files/": {
       "filePath": "_protected/files/index.lazy.ts",
       "parent": "/_protected/files"
+    },
+    "/files/$fileId/": {
+      "filePath": "files.$fileId/index.lazy.tsx"
     }
   }
 }
