@@ -17,7 +17,7 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => (
     >
       <Icon className='text-xl' icon='mdi:download' /> Download
     </a>
-    {file.shareable ? <FileRowSharingAction fileId={file.id} /> : null}
+    <FileRowSharingAction file={file} />
   </td>
 )
 

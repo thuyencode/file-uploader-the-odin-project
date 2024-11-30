@@ -9,7 +9,7 @@ import { redirect } from '@tanstack/react-router'
 import type { AxiosError } from 'axios'
 import { HttpStatus } from 'http-status-ts'
 
-interface UseFile {
+interface UseFileConfig {
   configFile: UseMutateAsyncFunction<
     UploadedFile,
     AxiosError<HttpError>,
@@ -17,7 +17,7 @@ interface UseFile {
   >
 }
 
-const useFile = (id: UploadedFile['id']): UseFile => {
+const useFileConfig = (id: UploadedFile['id']): UseFileConfig => {
   const { mutateAsync: configFile } = useMutation({
     mutationKey: [MUTATIONS_KEYS.FILES, id],
     mutationFn: async (fileConfig: FileConfigurationInput) =>
@@ -37,4 +37,4 @@ const useFile = (id: UploadedFile['id']): UseFile => {
   return { configFile }
 }
 
-export default useFile
+export default useFileConfig

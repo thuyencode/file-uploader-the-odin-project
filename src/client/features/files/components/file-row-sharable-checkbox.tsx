@@ -1,6 +1,6 @@
 import type { UploadedFile } from '@prisma/client'
 import type { FunctionComponent } from 'react'
-import useFile from '../hooks/use-file'
+import { useFileConfig } from '../hooks'
 
 interface FileRowSharableCheckbox {
   file: UploadedFile
@@ -9,7 +9,7 @@ interface FileRowSharableCheckbox {
 const FileRowSharableCheckbox: FunctionComponent<FileRowSharableCheckbox> = ({
   file
 }) => {
-  const { configFile } = useFile(file.id)
+  const { configFile } = useFileConfig(file.id)
 
   const checkboxId = `shareable-${file.filename}`
 

@@ -4,11 +4,11 @@ import type { FunctionComponent } from 'react'
 import { useState } from 'react'
 
 interface FileRowShareActionProps {
-  fileId: UploadedFile['id']
+  file: UploadedFile
 }
 
 const FileRowSharingAction: FunctionComponent<FileRowShareActionProps> = ({
-  fileId
+  file
 }) => {
   const [isCopied, setIsCopied] = useState(false)
 
@@ -21,7 +21,7 @@ const FileRowSharingAction: FunctionComponent<FileRowShareActionProps> = ({
 
     await Promise.all([
       navigator.clipboard.writeText(
-        `${document.location.host}/files/${fileId}`
+        `${document.location.host}/files/${file.id}`
       ),
       new Promise((resolve) => {
         setTimeout(resolve, 2000)
@@ -37,6 +37,7 @@ const FileRowSharingAction: FunctionComponent<FileRowShareActionProps> = ({
       onClick={() => {
         void handleOnClick()
       }}
+      disabled={!file.shareable}
     >
       <Icon
         className='text-xl'
