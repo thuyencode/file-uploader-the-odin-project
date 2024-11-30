@@ -57,7 +57,9 @@ export default ts_eslint.config(
       '@typescript-eslint/no-magic-numbers': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/strict-boolean-expressions': 'off',
-      '@typescript-eslint/only-throw-error': 'off'
+      '@typescript-eslint/only-throw-error': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-redundant-type-constituents': 'off'
     }
   }
 )

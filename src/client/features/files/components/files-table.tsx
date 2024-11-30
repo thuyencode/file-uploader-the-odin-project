@@ -7,7 +7,7 @@ interface FilesTableProps {
 }
 
 const FilesTable: FunctionComponent<FilesTableProps> = ({ files }) => (
-  <div className='overflow-x-auto'>
+  <div className='h-full overflow-x-auto'>
     <table className='table table-zebra max-xl:table-sm max-lg:table-xs'>
       <thead>
         <tr>
@@ -17,7 +17,7 @@ const FilesTable: FunctionComponent<FilesTableProps> = ({ files }) => (
           <th>Mimetype</th>
           <th>Size</th>
           <th>Sharable</th>
-          <th>Action(s)</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
