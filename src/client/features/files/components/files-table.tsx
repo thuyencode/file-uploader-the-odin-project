@@ -16,7 +16,7 @@ const FilesTable: FunctionComponent<FilesTableProps> = ({ files }) => (
           <th>Last Updated</th>
           <th>Mimetype</th>
           <th>Size</th>
-          <th>Sharable</th>
+          <th>Shareable</th>
           <th>Actions</th>
         </tr>
       </thead>

@@ -2,7 +2,7 @@ import { bytesToMB } from '@/client/libs/utils'
 import type { UploadedFile } from '@prisma/client'
 import type { FunctionComponent } from 'react'
 import FileRowActions from './file-row-actions'
-import FileRowSharableCheckbox from './file-row-sharable-checkbox'
+import FileRowShareableCheckbox from './file-row-shareable-checkbox'
 
 interface FileRowProps {
   file: UploadedFile
@@ -20,7 +20,7 @@ const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => (
     <td>{file.mimetype}</td>
     <td>{bytesToMB(file.size).toFixed(2)} MB</td>
 
-    <FileRowSharableCheckbox file={file} />
+    <FileRowShareableCheckbox file={file} />
 
     <FileRowActions file={file} />
   </tr>
