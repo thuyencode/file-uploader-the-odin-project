@@ -10,7 +10,7 @@ interface FileRowActionsProps {
 
 const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
   const ref = useCloseDialogElement()
-  const URL = `${document.location.host}/files/${file.id}`
+  const URL = `${document.location.protocol}//${document.location.host}/files/${file.id}`
 
   return (
     <td className='inline-flex items-center gap-2 font-medium'>
