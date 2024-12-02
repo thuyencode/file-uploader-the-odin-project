@@ -1,5 +1,6 @@
 import { bytesToMB } from '@/client/libs/utils'
 import type { UploadedFile } from '@prisma/client'
+import { Link } from '@tanstack/react-router'
 import type { FunctionComponent } from 'react'
 import FileRowActions from './file-row-actions'
 import FileRowShareableCheckbox from './file-row-shareable-checkbox'
@@ -12,7 +13,16 @@ interface FileRowProps {
 const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => (
   <tr className='hover'>
     <th>{id}</th>
-    <td>{file.originalname}</td>
+    <td>
+      <Link
+        className='link-hover link'
+        to='/files/$fileId'
+        params={{ fileId: file.id }}
+      >
+        {file.originalname}
+      </Link>
+    </td>
+
     <td>
       {file.updated_date.toLocaleDateString()}{' '}
       {file.updated_date.toLocaleTimeString()}

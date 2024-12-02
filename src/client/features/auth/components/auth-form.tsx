@@ -66,7 +66,7 @@ const AuthForm: FunctionComponent<AuthFormProps> = ({
 
   return (
     <form
-      className='mx-auto max-w-96 space-y-10 text-center'
+      className='mx-auto max-w-md space-y-10 text-center'
       onSubmit={(event) => {
         void handleSubmit(onSubmit)(event)
       }}

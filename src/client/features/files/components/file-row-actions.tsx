@@ -1,6 +1,7 @@
 import { useCloseDialogElement } from '@/client/hooks'
 import { Icon } from '@iconify/react'
 import type { UploadedFile } from '@prisma/client'
+import { Link } from '@tanstack/react-router'
 import { QRCodeSVG } from 'qrcode.react'
 import { useState, type FunctionComponent } from 'react'
 
@@ -44,6 +45,15 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
               >
                 <Icon className='text-xl' icon='mdi:download' /> Download
               </a>
+
+              <Link
+                className='btn btn-info btn-sm btn-block gap-1'
+                to='/files/$fileId'
+                params={{ fileId: file.id }}
+              >
+                <Icon className='text-xl' icon='mdi:arrow-right' />
+                Go to file
+              </Link>
             </div>
           </div>
         </div>
