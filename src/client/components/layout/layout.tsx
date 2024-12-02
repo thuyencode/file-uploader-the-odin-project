@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
-import TanStackRouterDevtools from '../dev-tools/tanstack-router'
+import { TanStackRouterDevtools } from '../dev-tools'
 import { RenderWhenAuthed } from '../ui'
 import Footer from './footer'
 import Header from './header'
