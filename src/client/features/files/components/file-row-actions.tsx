@@ -1,4 +1,5 @@
 import { useCloseDialogElement } from '@/client/hooks'
+import { getFileDownloadURL, getFileSharingURL } from '@/client/libs/utils'
 import { Icon } from '@iconify/react'
 import type { UploadedFile } from '@prisma/client'
 import { Link } from '@tanstack/react-router'
@@ -11,7 +12,9 @@ interface FileRowActionsProps {
 
 const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
   const ref = useCloseDialogElement()
-  const URL = `${document.location.protocol}//${document.location.host}/files/${file.id}`
+
+  const fileSharingURL = getFileSharingURL(file.id)
+  const fileDownloadURL = getFileDownloadURL(file.id)
 
   return (
     <td className='inline-flex items-center gap-2 font-medium'>
@@ -28,18 +31,18 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
           {file.shareable ? (
             <figure className='mt-4'>
               <div className='border border-neutral-content/50'>
-                <QRCodeSVG value={URL} size={180} />
+                <QRCodeSVG value={fileSharingURL} size={180} />
               </div>
             </figure>
           ) : null}
 
           <div className='card-body'>
             <div className='card-actions'>
-              {file.shareable ? <CopyButton url={URL} /> : null}
+              {file.shareable ? <CopyButton url={fileSharingURL} /> : null}
 
               <a
                 className='btn btn-outline btn-secondary btn-sm btn-block gap-1'
-                href={`/api/files/${file.id}/download`}
+                href={fileDownloadURL}
                 target='_blank'
                 rel='noopener noreferrer'
               >
