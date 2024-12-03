@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react/dist/iconify.js'
+import { Icon } from '@iconify/react'
 import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 
