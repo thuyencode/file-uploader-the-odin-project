@@ -8,7 +8,7 @@ const UnauthorizedPage = (): ReactElement => (
     <h2>You're not authorized to access this resource</h2>
 
     <Link className='btn btn-primary gap-1' to='/'>
-      <Icon icon='lets-icons:back' /> Return to home page
+      <Icon className='text-xl' icon='lets-icons:back' /> Return to home page
     </Link>
   </div>
 )

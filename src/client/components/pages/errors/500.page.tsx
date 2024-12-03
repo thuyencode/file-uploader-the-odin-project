@@ -8,7 +8,7 @@ const InternalServerErrorPage = (): ReactElement => (
     <h2>Internal Server Error</h2>
 
     <Link className='btn btn-primary gap-1' to='/'>
-      <Icon icon='lets-icons:back' /> Return to home page
+      <Icon className='text-xl' icon='lets-icons:back' /> Return to home page
     </Link>
   </div>
 )
