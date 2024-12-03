@@ -4,7 +4,8 @@ import { Icon } from '@iconify/react'
 import type { UploadedFile } from '@prisma/client'
 import { Link } from '@tanstack/react-router'
 import { QRCodeSVG } from 'qrcode.react'
-import { useState, type FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
+import { CopyButton, DownloadButton } from './ui'
 
 interface FileRowActionsProps {
   file: UploadedFile
@@ -38,16 +39,17 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
 
           <div className='card-body'>
             <div className='card-actions'>
-              {file.shareable ? <CopyButton url={fileSharingURL} /> : null}
+              {file.shareable ? (
+                <CopyButton
+                  className='btn-sm btn-block'
+                  text={fileSharingURL}
+                />
+              ) : null}
 
-              <a
-                className='btn btn-outline btn-secondary btn-sm btn-block gap-1'
-                href={fileDownloadURL}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Icon className='text-xl' icon='mdi:download' /> Download
-              </a>
+              <DownloadButton
+                className='btn-sm btn-block'
+                downloadURL={fileDownloadURL}
+              />
 
               <Link
                 className='btn btn-info btn-sm btn-block gap-1'
@@ -62,46 +64,6 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
         </div>
       </details>
     </td>
-  )
-}
-
-interface CopyButtonProps {
-  url: string
-}
-
-const CopyButton: FunctionComponent<CopyButtonProps> = ({ url }) => {
-  const [isCopied, setIsCopied] = useState(false)
-
-  const handleOnClick = async (): Promise<void> => {
-    if (isCopied) {
-      return
-    }
-
-    setIsCopied(true)
-
-    await Promise.all([
-      navigator.clipboard.writeText(url),
-      new Promise((resolve) => {
-        setTimeout(resolve, 2000)
-      })
-    ])
-
-    setIsCopied(false)
-  }
-
-  return (
-    <button
-      className={`btn ${isCopied ? 'btn-success' : 'btn-outline'} btn-sm btn-block gap-1`}
-      onClick={() => {
-        void handleOnClick()
-      }}
-    >
-      <Icon
-        className='text-xl'
-        icon={isCopied ? 'mdi:checkbox-multiple-marked' : 'mdi:content-copy'}
-      />
-      {isCopied ? 'Copied' : 'Copy'}
-    </button>
   )
 }
 
