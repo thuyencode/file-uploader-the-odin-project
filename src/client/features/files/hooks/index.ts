@@ -1,4 +1,5 @@
+import useFile from './use-file'
 import useFileConfig from './use-file-config'
 import useFiles from './use-files'
 
-export { useFileConfig, useFiles }
+export { useFile, useFileConfig, useFiles }

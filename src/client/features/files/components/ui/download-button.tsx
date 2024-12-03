@@ -3,17 +3,17 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import type { ComponentProps, FunctionComponent } from 'react'
 
 interface DownloadButtonProps extends Omit<ComponentProps<'a'>, 'href'> {
-  downloadURL: string
+  url: string
 }
 
 const DownloadButton: FunctionComponent<DownloadButtonProps> = ({
-  downloadURL,
+  url,
   className,
   ...props
 }) => (
   <a
     className={cn('btn btn-outline btn-secondary gap-1', className)}
-    href={downloadURL}
+    href={url}
     target='_blank'
     rel='noopener noreferrer'
     {...props}

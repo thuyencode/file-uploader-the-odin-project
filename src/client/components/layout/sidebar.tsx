@@ -36,7 +36,11 @@ const Sidebar: FunctionComponent = () => {
 
       <ul className='menu flex-1 font-medium'>
         <li>
-          <Link className='link-primary' to='/files'>
+          <Link
+            className='link-primary'
+            to='/files'
+            activeOptions={{ exact: true }}
+          >
             <Icon className='text-xl' icon={'mdi:folder-open-outline'} />
             Files
           </Link>

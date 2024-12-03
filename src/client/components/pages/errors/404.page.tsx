@@ -7,7 +7,7 @@ const NotFoundPage = (): ReactElement => (
     <h1 className='text-error'>404</h1>
     <h2>Not Found</h2>
 
-    <Link className='btn btn-primary gap-1' to='/'>
+    <Link className='btn btn-primary gap-1' to='/' replace>
       <Icon className='text-xl' icon='lets-icons:back' /> Return to home page
     </Link>
   </div>

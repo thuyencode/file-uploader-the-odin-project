@@ -12,6 +12,12 @@ const postFileConfig = async (
   (await baseApi.post<UploadedFile>(`/files/${id}`, fileConfigurationInput))
     .data
 
-const FilesApi = { getFiles, postFileConfig }
+const getFile = async (
+  id: UploadedFile['id'],
+  signal?: AbortSignal
+): Promise<UploadedFile> =>
+  (await baseApi.get<UploadedFile>(`/files/${id}`, { signal })).data
+
+const FilesApi = { getFiles, postFileConfig, getFile }
 
 export default FilesApi

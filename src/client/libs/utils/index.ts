@@ -20,3 +20,18 @@ export const getFileSharingURL = (fileId: UploadedFile['id']): string =>
 
 export const getFileDownloadURL = (fileId: UploadedFile['id']): string =>
   `${document.location.protocol}//${document.location.host}/api/files/${fileId}/download`
+
+const MIME_TYPE_ICONS: Record<string, string> = {
+  application: 'clarity:application-line',
+  audio: 'material-symbols:audio-file-outline',
+  font: 'bi:file-earmark-font',
+  image: 'mdi:file-image-outline',
+  model: 'tabler:file-3d',
+  text: 'mdi:file-text-outline',
+  video: 'material-symbols:video-file-outline'
+}
+
+export const getMimeTypeIcon = (type: string): string =>
+  MIME_TYPE_ICONS[type] ? MIME_TYPE_ICONS[type] : 'mdi:file-outline'
+
+export const lineClamp = (text: string): string => `${text.slice(0, 41)}...`

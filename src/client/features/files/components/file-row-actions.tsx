@@ -48,7 +48,7 @@ const FileRowActions: FunctionComponent<FileRowActionsProps> = ({ file }) => {
 
               <DownloadButton
                 className='btn-sm btn-block'
-                downloadURL={fileDownloadURL}
+                url={fileDownloadURL}
               />
 
               <Link

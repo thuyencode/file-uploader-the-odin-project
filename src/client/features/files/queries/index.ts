@@ -1,3 +1,3 @@
-import filesQueryOptions from './files.query'
+import { fileIdQueryOptions, filesQueryOptions } from './files.query'
 
-export { filesQueryOptions }
+export { fileIdQueryOptions, filesQueryOptions }

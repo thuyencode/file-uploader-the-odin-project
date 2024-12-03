@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
-import { FilesTable } from './components'
-import { useFiles } from './hooks'
+import { FilesTable } from '../components'
+import { useFiles } from '../hooks'
 
 const FilesPage = (): ReactElement => {
   const { files } = useFiles()
