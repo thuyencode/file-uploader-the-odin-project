@@ -52,7 +52,9 @@ const FileIdPage = (): ReactElement => {
           </figcaption>
         </figure>
 
-        <p className='font-medium'>Name: {lineClamp(file.originalname)}</p>
+        <p className='tooltip font-medium' data-tip={file.originalname}>
+          Name: {lineClamp(file.originalname)}
+        </p>
 
         <p className='font-medium'>Size: {sizeInMB} MB</p>
       </div>

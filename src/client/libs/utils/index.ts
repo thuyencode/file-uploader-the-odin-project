@@ -34,4 +34,5 @@ const MIME_TYPE_ICONS: Record<string, string> = {
 export const getMimeTypeIcon = (type: string): string =>
   MIME_TYPE_ICONS[type] ? MIME_TYPE_ICONS[type] : 'mdi:file-outline'
 
-export const lineClamp = (text: string): string => `${text.slice(0, 41)}...`
+export const lineClamp = (text: string): string =>
+  text.length > 40 ? `${text.slice(0, 41)}...` : text
