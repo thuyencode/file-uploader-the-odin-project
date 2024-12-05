@@ -4,11 +4,11 @@ import type { ReactElement } from 'react'
 
 const UnauthorizedPage = (): ReactElement => (
   <div className='mt-36 space-y-9 text-center'>
-    <h1 className='text-error'>404</h1>
+    <h1 className='text-error'>401</h1>
     <h2>You're not authorized to access this resource</h2>
 
-    <Link className='btn btn-primary gap-1' to='/'>
-      <Icon className='text-xl' icon='lets-icons:back' /> Return to home page
+    <Link className='btn btn-primary gap-1' to='/sign-in'>
+      <Icon className='text-xl' icon='lets-icons:back' /> Return to sign-in page
     </Link>
   </div>
 )

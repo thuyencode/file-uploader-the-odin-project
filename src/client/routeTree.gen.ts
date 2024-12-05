@@ -28,6 +28,9 @@ const AuthSignUpLazyImport = createFileRoute('/_auth/sign-up')()
 const AuthSignInLazyImport = createFileRoute('/_auth/sign-in')()
 const FilesFileIdIndexLazyImport = createFileRoute('/files/$fileId/')()
 const ProtectedFilesIndexLazyImport = createFileRoute('/_protected/files/')()
+const ProtectedFilesUploadIndexLazyImport = createFileRoute(
+  '/_protected/files/upload/',
+)()
 
 // Create/Update Routes
 
@@ -104,6 +107,15 @@ const ProtectedFilesIndexLazyRoute = ProtectedFilesIndexLazyImport.update({
 } as any).lazy(() =>
   import('./routes/_protected/files/index.lazy').then((d) => d.Route),
 )
+
+const ProtectedFilesUploadIndexLazyRoute =
+  ProtectedFilesUploadIndexLazyImport.update({
+    id: '/upload/',
+    path: '/upload/',
+    getParentRoute: () => ProtectedFilesRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_protected/files/upload/index.lazy').then((d) => d.Route),
+  )
 
 // Populate the FileRoutesByPath interface
 
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FilesFileIdIndexLazyImport
       parentRoute: typeof FilesFileIdRouteImport
     }
+    '/_protected/files/upload/': {
+      id: '/_protected/files/upload/'
+      path: '/upload'
+      fullPath: '/files/upload'
+      preLoaderRoute: typeof ProtectedFilesUploadIndexLazyImport
+      parentRoute: typeof ProtectedFilesRouteImport
+    }
   }
 }
 
@@ -214,10 +233,12 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface ProtectedFilesRouteRouteChildren {
   ProtectedFilesIndexLazyRoute: typeof ProtectedFilesIndexLazyRoute
+  ProtectedFilesUploadIndexLazyRoute: typeof ProtectedFilesUploadIndexLazyRoute
 }
 
 const ProtectedFilesRouteRouteChildren: ProtectedFilesRouteRouteChildren = {
   ProtectedFilesIndexLazyRoute: ProtectedFilesIndexLazyRoute,
+  ProtectedFilesUploadIndexLazyRoute: ProtectedFilesUploadIndexLazyRoute,
 }
 
 const ProtectedFilesRouteRouteWithChildren =
@@ -258,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/sign-up': typeof AuthSignUpLazyRoute
   '/files/': typeof ProtectedFilesIndexLazyRoute
   '/files/$fileId/': typeof FilesFileIdIndexLazyRoute
+  '/files/upload': typeof ProtectedFilesUploadIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -270,6 +292,7 @@ export interface FileRoutesByTo {
   '/sign-up': typeof AuthSignUpLazyRoute
   '/files': typeof ProtectedFilesIndexLazyRoute
   '/files/$fileId': typeof FilesFileIdIndexLazyRoute
+  '/files/upload': typeof ProtectedFilesUploadIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -286,6 +309,7 @@ export interface FileRoutesById {
   '/_auth/sign-up': typeof AuthSignUpLazyRoute
   '/_protected/files/': typeof ProtectedFilesIndexLazyRoute
   '/files/$fileId/': typeof FilesFileIdIndexLazyRoute
+  '/_protected/files/upload/': typeof ProtectedFilesUploadIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -302,6 +326,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/files/'
     | '/files/$fileId/'
+    | '/files/upload'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -313,6 +338,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/files'
     | '/files/$fileId'
+    | '/files/upload'
   id:
     | '__root__'
     | '/'
@@ -327,6 +353,7 @@ export interface FileRouteTypes {
     | '/_auth/sign-up'
     | '/_protected/files/'
     | '/files/$fileId/'
+    | '/_protected/files/upload/'
   fileRoutesById: FileRoutesById
 }
 
@@ -398,7 +425,8 @@ export const routeTree = rootRoute
       "filePath": "_protected/files/route.ts",
       "parent": "/_protected",
       "children": [
-        "/_protected/files/"
+        "/_protected/files/",
+        "/_protected/files/upload/"
       ]
     },
     "/files/$fileId": {
@@ -422,6 +450,10 @@ export const routeTree = rootRoute
     "/files/$fileId/": {
       "filePath": "files.$fileId/index.lazy.ts",
       "parent": "/files/$fileId"
+    },
+    "/_protected/files/upload/": {
+      "filePath": "_protected/files/upload/index.lazy.ts",
+      "parent": "/_protected/files"
     }
   }
 }

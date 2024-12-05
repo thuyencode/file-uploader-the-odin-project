@@ -6,7 +6,7 @@ const FilesPage = (): ReactElement => {
   const { files } = useFiles()
 
   if (files.length === 0) {
-    return <div>There's no file.</div>
+    return <h2 className='mt-36 text-center'>There's no file.</h2>
   }
 
   return <FilesTable files={files} />

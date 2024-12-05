@@ -47,10 +47,10 @@ const Sidebar: FunctionComponent = () => {
         </li>
 
         <li className='xl:hidden'>
-          <a>
+          <Link to='/files/upload'>
             <Icon className='text-xl' icon={'mdi:cloud-upload-outline'} />
             Upload File
-          </a>
+          </Link>
         </li>
 
         <li>

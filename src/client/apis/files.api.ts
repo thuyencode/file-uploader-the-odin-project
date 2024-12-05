@@ -18,6 +18,28 @@ const getFile = async (
 ): Promise<UploadedFile> =>
   (await baseApi.get<UploadedFile>(`/files/${id}`, { signal })).data
 
-const FilesApi = { getFiles, postFileConfig, getFile }
+const postFileUpload = async (
+  formData: FormData,
+  progressCallback?: (progress: number) => void,
+  signal?: AbortSignal
+): Promise<UploadedFile> =>
+  (
+    await baseApi.post<UploadedFile>(`/files/upload`, formData, {
+      signal,
+      onUploadProgress(progressEvent) {
+        if (!progressCallback) {
+          return
+        }
+
+        const progress = progressEvent.total
+          ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+          : 0
+
+        progressCallback(progress)
+      }
+    })
+  ).data
+
+const FilesApi = { getFiles, postFileConfig, getFile, postFileUpload }
 
 export default FilesApi

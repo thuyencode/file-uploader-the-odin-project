@@ -1,17 +1,14 @@
-import type { HttpError } from '@/shared/errors'
 import type { UploadedFile } from '@prisma/client'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
 import { useMemo } from 'react'
 import { filesQueryOptions } from '../queries'
 
 interface UseFiles {
   files: UploadedFile[]
-  error: AxiosError<HttpError> | null
 }
 
 const useFiles = (): UseFiles => {
-  const { data, error } = useSuspenseQuery(filesQueryOptions)
+  const { data } = useSuspenseQuery(filesQueryOptions)
 
   const files = useMemo(
     () =>
@@ -23,7 +20,7 @@ const useFiles = (): UseFiles => {
     [data]
   )
 
-  return { files, error }
+  return { files }
 }
 
 export default useFiles

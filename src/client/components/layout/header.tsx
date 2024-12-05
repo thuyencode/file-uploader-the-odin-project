@@ -21,10 +21,10 @@ const Header = (): ReactElement => (
               <Icon className='text-xl' icon={'mdi:hamburger-close'} />
             </label>
 
-            <a className='btn btn-primary max-xl:hidden'>
-              Upload Files
+            <Link className='btn btn-primary max-xl:hidden' to='/files/upload'>
+              Upload File
               <Icon className='text-xl' icon={'mdi:cloud-upload-outline'} />
-            </a>
+            </Link>
           </>
         }
         whenNot={
