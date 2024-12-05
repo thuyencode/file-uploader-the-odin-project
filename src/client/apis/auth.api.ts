@@ -3,16 +3,16 @@ import type { AxiosResponse } from 'axios'
 import baseApi from './base-api'
 
 const getAuthStatus = async (signal?: AbortSignal): Promise<Express.User> =>
-  (await baseApi.get<Express.User>('/auth/status', { signal })).data
+  (await baseApi.get<Express.User>('/api/auth/status', { signal })).data
 
 const postSignIn = async (signInInput: SignInInput): Promise<Express.User> =>
-  (await baseApi.post<Express.User>('/auth/sign-in', signInInput)).data
+  (await baseApi.post<Express.User>('/api/auth/sign-in', signInInput)).data
 
 const postSignUp = async (signUpInput: SignUpInput): Promise<Express.User> =>
-  (await baseApi.post<Express.User>('/auth/sign-up', signUpInput)).data
+  (await baseApi.post<Express.User>('/api/auth/sign-up', signUpInput)).data
 
 const postSignOut = async (): Promise<AxiosResponse> =>
-  await baseApi.post('/auth/sign-out')
+  await baseApi.post('/api/auth/sign-out')
 
 const AuthApi = {
   getAuthStatus,
