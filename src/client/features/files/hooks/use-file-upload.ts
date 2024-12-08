@@ -1,7 +1,7 @@
 import FilesApi from '@/client/apis/files.api'
 import { useNavigate } from '@tanstack/react-router'
 import { isCancel } from 'axios'
-import { useRef, useState, type ChangeEvent } from 'react'
+import { useCallback, useRef, useState, type ChangeEvent } from 'react'
 
 type UploadStatus = 'idle' | 'uploading' | 'success' | 'error'
 
@@ -21,7 +21,7 @@ const useFileUpload = (): UseFileUpload => {
   const [uploadProgress, setUploadProgress] = useState(0)
   const abortController = useRef<AbortController | null>(null)
 
-  const handleFileInput = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleFileInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { files }
     } = e
@@ -29,9 +29,9 @@ const useFileUpload = (): UseFileUpload => {
     if (files) {
       setFile(files[0])
     }
-  }
+  }, [])
 
-  const handleFileUpload = async (): Promise<void> => {
+  const handleFileUpload = useCallback(async () => {
     if (!file) return
 
     abortController.current = new AbortController()
@@ -64,14 +64,14 @@ const useFileUpload = (): UseFileUpload => {
 
       setUploadProgress(0)
     }
-  }
+  }, [file, navigate])
 
-  const handleFileUploadCancellation = (): void => {
+  const handleFileUploadCancellation = useCallback(() => {
     abortController.current?.abort()
 
     setUploadProgress(0)
     setUploadStatus('idle')
-  }
+  }, [])
 
   return {
     uploadProgress,

@@ -1,5 +1,5 @@
 import { bytesToMB } from '@/client/libs/utils'
-import type { FunctionComponent, ReactElement } from 'react'
+import { memo, type ReactElement } from 'react'
 import { useFileUpload, type UseFileUpload } from '../hooks'
 
 const UploadFilePage = (): ReactElement => {
@@ -46,27 +46,28 @@ type FileUploadProgressProps = Pick<
   'uploadProgress' | 'uploadStatus'
 >
 
-const FileUploadProgress: FunctionComponent<FileUploadProgressProps> = ({
-  uploadProgress,
-  uploadStatus
-}) => {
-  if (uploadStatus === 'uploading') {
-    return (
-      <div className='text-center'>
-        <p>{uploadProgress}%</p>
-        <progress className='progress w-56' value={uploadProgress} max='100' />
-      </div>
-    )
-  }
+const FileUploadProgress = memo<FileUploadProgressProps>(
+  ({ uploadProgress, uploadStatus }) => {
+    if (uploadStatus === 'uploading') {
+      return (
+        <div className='text-center'>
+          <p>{uploadProgress}%</p>
+          <progress
+            className='progress w-56'
+            value={uploadProgress}
+            max='100'
+          />
+        </div>
+      )
+    }
 
-  return null
-}
+    return null
+  }
+)
 
 type FileUploadStatusProps = Pick<UseFileUpload, 'uploadStatus'>
 
-const FileUploadStatus: FunctionComponent<FileUploadStatusProps> = ({
-  uploadStatus
-}) => {
+const FileUploadStatus = memo<FileUploadStatusProps>(({ uploadStatus }) => {
   switch (uploadStatus) {
     case 'success':
       return (
@@ -79,13 +80,11 @@ const FileUploadStatus: FunctionComponent<FileUploadStatusProps> = ({
     default:
       return null
   }
-}
+})
 
 type FileUploadInputProps = Pick<UseFileUpload, 'handleFileInput'>
 
-const FileUploadInput: FunctionComponent<FileUploadInputProps> = ({
-  handleFileInput
-}) => (
+const FileUploadInput = memo<FileUploadInputProps>(({ handleFileInput }) => (
   <input
     className='file-input file-input-bordered w-full max-w-sm'
     type='file'
@@ -93,41 +92,41 @@ const FileUploadInput: FunctionComponent<FileUploadInputProps> = ({
     id='file'
     onChange={handleFileInput}
   />
-)
+))
 
 type FileUploadActionsProps = Pick<
   UseFileUpload,
   'file' | 'uploadStatus' | 'handleFileUpload' | 'handleFileUploadCancellation'
 >
 
-const FileUploadActions: FunctionComponent<FileUploadActionsProps> = ({
-  file,
-  uploadStatus,
-  handleFileUpload,
-  handleFileUploadCancellation
-}) => (
-  <div className='grid grid-cols-2 gap-2.5'>
-    <button
-      className={`btn btn-primary ${uploadStatus !== 'uploading' && 'col-span-2'}`}
-      disabled={!(file && uploadStatus !== 'uploading')}
-      onClick={() => {
-        void handleFileUpload()
-      }}
-    >
-      Upload
-    </button>
-
-    {uploadStatus === 'uploading' ? (
-      <button className='btn btn-error' onClick={handleFileUploadCancellation}>
-        Cancel
+const FileUploadActions = memo<FileUploadActionsProps>(
+  ({ file, uploadStatus, handleFileUpload, handleFileUploadCancellation }) => (
+    <div className='grid grid-cols-2 gap-2.5'>
+      <button
+        className={`btn btn-primary ${uploadStatus !== 'uploading' && 'col-span-2'}`}
+        disabled={!(file && uploadStatus !== 'uploading')}
+        onClick={() => {
+          void handleFileUpload()
+        }}
+      >
+        Upload
       </button>
-    ) : null}
-  </div>
+
+      {uploadStatus === 'uploading' ? (
+        <button
+          className='btn btn-error'
+          onClick={handleFileUploadCancellation}
+        >
+          Cancel
+        </button>
+      ) : null}
+    </div>
+  )
 )
 
 type FileInfoProps = Pick<UseFileUpload, 'file'>
 
-const FileInfo: FunctionComponent<FileInfoProps> = ({ file }) => {
+const FileInfo = memo<FileInfoProps>(({ file }) => {
   if (file) {
     return (
       <div className='font-medium'>
@@ -139,6 +138,6 @@ const FileInfo: FunctionComponent<FileInfoProps> = ({ file }) => {
   }
 
   return null
-}
+})
 
 export default UploadFilePage

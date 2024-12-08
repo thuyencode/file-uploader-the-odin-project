@@ -18,6 +18,7 @@ const ThemeToggle: FunctionComponent = () => {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- This is fine
     const theme = localStorage.getItem('theme') as 'light' | 'dark' | ''
 
     setToggleState(TOGGLE_STATES[!theme ? 'default' : theme])
