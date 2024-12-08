@@ -7,7 +7,7 @@ const SignInPage = (): ReactElement => {
   const { signIn } = useSignIn()
 
   return (
-    <div className='mt-36'>
+    <div className='w-full md:mt-36'>
       <AuthForm type='sign-in' onSubmitAction={signIn} schema={SignInSchema} />
     </div>
   )

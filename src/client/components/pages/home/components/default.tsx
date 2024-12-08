@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 
 const DefaultHomePage = (): ReactElement => (
-  <div className='mt-36 space-y-9 text-center'>
+  <div className='space-y-9 text-center md:mt-36'>
     <h2 className='flex items-center justify-center'>
       Let's start sharing your files
       <Icon

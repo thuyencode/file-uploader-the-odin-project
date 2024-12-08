@@ -42,7 +42,7 @@ const FileIdPage = (): ReactElement => {
   }
 
   return (
-    <div className='mt-36 flex w-full items-center justify-center gap-5 text-center'>
+    <div className='flex w-full items-center justify-center gap-5 text-center max-lg:flex-col-reverse md:mt-36'>
       <div className='space-y-2.5'>
         <figure className='pb-2.5'>
           <Icon className='mx-auto size-36' icon={fileIcon} />
@@ -59,7 +59,7 @@ const FileIdPage = (): ReactElement => {
         <p className='font-medium'>Size: {sizeInMB} MB</p>
       </div>
 
-      <div className='divider divider-secondary divider-horizontal' />
+      <div className='divider divider-secondary divider-horizontal max-lg:hidden' />
 
       <div>
         <div className='w-min min-w-[202px] space-y-2.5'>

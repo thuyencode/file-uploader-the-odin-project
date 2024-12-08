@@ -13,6 +13,7 @@ interface FileRowProps {
 const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => (
   <tr className='hover'>
     <th>{id}</th>
+
     <td>
       <Link
         className='link-hover link'
@@ -23,12 +24,12 @@ const FileRow: FunctionComponent<FileRowProps> = ({ file, id }) => (
       </Link>
     </td>
 
-    <td>
+    <td className='max-md:hidden'>
       {file.updated_date.toLocaleDateString()}{' '}
       {file.updated_date.toLocaleTimeString()}
     </td>
-    <td>{file.mimetype}</td>
-    <td>{bytesToMB(file.size).toFixed(2)} MB</td>
+    <td className='max-md:hidden'>{file.mimetype}</td>
+    <td className='max-md:hidden'>{bytesToMB(file.size).toFixed(2)} MB</td>
 
     <FileRowShareableCheckbox file={file} />
 

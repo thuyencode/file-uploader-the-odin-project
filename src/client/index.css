@@ -4,21 +4,21 @@
 
 @layer base {
   * {
-    @apply text-base;
+    @apply text-sm lg:text-base;
   }
   h1 {
-    @apply text-8xl font-bold;
+    @apply text-7xl font-bold lg:text-8xl;
   }
   h2 {
-    @apply text-4xl font-bold;
+    @apply text-3xl font-bold lg:text-4xl;
   }
   h3 {
-    @apply text-2xl font-semibold;
+    @apply text-xl font-semibold lg:text-2xl;
   }
   h4 {
-    @apply text-xl font-medium;
+    @apply text-lg font-medium lg:text-xl;
   }
   p {
-    @apply text-lg;
+    @apply text-base lg:text-lg;
   }
 }

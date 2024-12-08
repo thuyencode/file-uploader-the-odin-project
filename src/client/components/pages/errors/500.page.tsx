@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 import type { ReactElement } from 'react'
 
 const InternalServerErrorPage = (): ReactElement => (
-  <div className='mt-36 space-y-9 text-center'>
+  <div className='mx-1 space-y-9 text-center md:mt-36'>
     <h1 className='text-error'>500</h1>
     <h2>Internal Server Error</h2>
 

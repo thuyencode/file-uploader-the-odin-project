@@ -13,7 +13,7 @@ const UploadFilePage = (): ReactElement => {
   } = useFileUpload()
 
   return (
-    <div className='mt-36 flex w-full items-center justify-center gap-5'>
+    <div className='flex w-full items-center justify-center gap-5 max-lg:flex-col md:mt-36'>
       <div className='space-y-2.5'>
         <FileUploadProgress
           uploadProgress={uploadProgress}
@@ -33,7 +33,7 @@ const UploadFilePage = (): ReactElement => {
       </div>
 
       {file ? (
-        <div className='divider divider-secondary divider-horizontal' />
+        <div className='divider divider-secondary divider-horizontal max-lg:hidden' />
       ) : null}
 
       <FileInfo file={file} />
@@ -129,7 +129,7 @@ type FileInfoProps = Pick<UseFileUpload, 'file'>
 const FileInfo = memo<FileInfoProps>(({ file }) => {
   if (file) {
     return (
-      <div className='font-medium'>
+      <div className='font-medium max-lg:text-center'>
         <p>File name: {file.name}</p>
         <p>Size: {bytesToMB(file.size).toFixed(5)} MB</p>
         <p>Type: {file.type || 'unknown'}</p>
